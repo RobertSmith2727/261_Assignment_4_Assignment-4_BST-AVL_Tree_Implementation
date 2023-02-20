@@ -213,7 +213,8 @@ class BST:
         #         return True
 
         # one subtree
-        if remove_node.left or remove_node.right is not None:
+        if remove_node.left is not None and remove_node.right is None or \
+            remove_node.left is None and remove_node.right is not None:
             self._remove_one_subtree(remove_parent, remove_node)
             return True
             # if remove_parent.value > value:
@@ -491,7 +492,7 @@ if __name__ == '__main__':
     # ((50, 40, 60, 30, 70, 20, 80, 45), 40),
     test_cases = (
 
-        ((50, 40, 60, 30, 70, 20, 80, 45), 30),
+        ((50, 40, 60, 30, 70, 20, 80, 45), 40),
     )
     for case, del_value in test_cases:
         tree = BST(case)
