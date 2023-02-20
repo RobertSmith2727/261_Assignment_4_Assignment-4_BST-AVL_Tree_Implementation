@@ -167,12 +167,11 @@ class BST:
                     root_successor_parent = node
                 node = node.left
 
-            # # if root successor is roots right node
-            # if self._root.right == root_successor:
-            #     self._root.value = root_successor.value
-            #     self._root.right = root_successor.right
-            #     self._root.left = root_successor.left
-            #     return True
+            # if root successor is roots right node
+            if self._root.right == root_successor:
+                self._root.value = root_successor.value
+                self._root.right = root_successor.right
+                return True
             else:
                 self._root.value = root_successor.value
                 root_successor_parent.left = root_successor.right
@@ -381,9 +380,10 @@ if __name__ == '__main__':
     # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
     # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
     # ((1, 2, 3, 4), 2)
+    # ((1, 2, 3), 3)
     test_cases = (
 
-        ((1, 2, 3), 3),
+        ((64, 100, -59, -22, -17, 54, 24, 26, -5, -33), 64),
         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
         ((50, 40, 60, 30, 70, 20, 80, 45), 45),
         ((50, 40, 60, 30, 70, 20, 80, 45), 40),
