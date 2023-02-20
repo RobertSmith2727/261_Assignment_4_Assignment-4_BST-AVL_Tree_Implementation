@@ -202,7 +202,6 @@ class BST:
             return False
 
         # no children
-        self._remove_no_subtrees(remove_parent, remove_node)
         if remove_node.left is None and remove_node.right is None:
             self._remove_no_subtrees(remove_parent, remove_node)
             return True
@@ -214,7 +213,7 @@ class BST:
         #         return True
 
         # one subtree
-        if remove_node.left is None and remove_node.right is not None:
+        if remove_node.left or remove_node.right is not None:
             self._remove_one_subtree(remove_parent, remove_node)
             return True
             # if remove_parent.value > value:
@@ -303,7 +302,7 @@ class BST:
         TODO: Write your implementation
         """
         # remove node that has a left or right subtree (only)
-        if remove_node.left is None and remove_node.right is not None:
+        if remove_node.left is None:
             if remove_parent.value > remove_node.value:
                 remove_parent.left = remove_node.right
                 return
@@ -311,13 +310,13 @@ class BST:
                 remove_parent.right = remove_node.right
                 return
 
-        if remove_node.left is not None and remove_node.right is None:
+        if remove_node.right is None:
             if remove_parent.value > remove_node.value:
                 remove_parent.left = remove_node.left
                 return
-            # else:
-            #     remove_parent.right = remove_node.left
-            #     return
+            else:
+                remove_parent.right = remove_node.left
+                return
 
     def _remove_two_subtrees(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
@@ -335,11 +334,10 @@ class BST:
             successor.right = remove_node.right
         if remove_parent.value < successor.value:
             remove_parent.right = successor
-            return True
+            return
         else:
             remove_parent.left = successor
-            return True
-        pass
+            return
 
     def find_successor(self, remove_node: BSTNode):
         """
@@ -483,15 +481,16 @@ if __name__ == '__main__':
     # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
     # ((1, 2, 3, 4), 2)
     # ((1, 2, 3), 3)
+    # ((26, 58, 42, 12, -45, -12, 22, -70, -36), - 70),
+    # ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
+    # ((6, -83, -66, -4, 37, 25, 30, 40, 85), 6),
+    # ((25, -83, -66, -21, 37, 30, 40, 85), -83),
+    # ((64, 100, -59, -22, -17, 54, 24, 26, -5, -33), 64),
+    # ((50, 40, 60, 30, 70, 20, 80, 45), 0),
+    # ((50, 40, 60, 30, 70, 20, 80, 45), 45),
+    # ((50, 40, 60, 30, 70, 20, 80, 45), 40),
     test_cases = (
-        ((26, 58, 42, 12, -45, -12, 22, -70, -36), - 70),
-        ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
-        ((6, -83, -66, -4, 37, 25, 30, 40, 85),6),
-        ((25,-83,-66,-21,37,30,40,85), -83),
-        ((64, 100, -59, -22, -17, 54, 24, 26, -5, -33), 64),
-        ((50, 40, 60, 30, 70, 20, 80, 45), 0),
-        ((50, 40, 60, 30, 70, 20, 80, 45), 45),
-        ((50, 40, 60, 30, 70, 20, 80, 45), 40),
+
         ((50, 40, 60, 30, 70, 20, 80, 45), 30),
     )
     for case, del_value in test_cases:
