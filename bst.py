@@ -291,6 +291,11 @@ class BST:
             return
 
         if remove_node.left is None and remove_node.right is None:
+            if remove_parent.value > remove_node.value:
+                remove_parent.left = None
+                return
+            else:
+                remove_parent.right = None
             return
             # if remove_parent.value > remove_node.value:
             #     remove_parent.left = None
@@ -493,7 +498,11 @@ if __name__ == '__main__':
     # ((50, 40, 60, 30, 70, 20, 80, 45), 40),
     test_cases = (
 
+        ((1, 2, 3), 3),
+        ((50, 40, 60, 30, 70, 20, 80, 45), 0),
+        ((50, 40, 60, 30, 70, 20, 80, 45), 45),
         ((50, 40, 60, 30, 70, 20, 80, 45), 40),
+        ((50, 40, 60, 30, 70, 20, 80, 45), 30),
     )
     for case, del_value in test_cases:
         tree = BST(case)
