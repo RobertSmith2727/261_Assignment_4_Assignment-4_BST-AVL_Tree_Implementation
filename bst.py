@@ -329,7 +329,7 @@ class BST:
 
         node = self._root
         if node.left is None:
-            return node
+            return node.value
         while node is not None:
             min_node = node
             node = node.left
