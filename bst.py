@@ -291,7 +291,7 @@ class BST:
             return
 
         if remove_node.left is None and remove_node.right is None:
-            if remove_parent.left == remove_node.value:
+            if remove_parent.left == remove_node:
                 remove_parent.left = None
                 return
             remove_parent.right = None
@@ -497,7 +497,7 @@ if __name__ == '__main__':
     # ((50, 40, 60, 30, 70, 20, 80, 45), 40),
     test_cases = (
 
-        ((1, 2, 3), 3),
+        ((50, 40, 60, 30, 70, 20, 80, 45), 20),
         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
         ((50, 40, 60, 30, 70, 20, 80, 45), 45),
         ((50, 40, 60, 30, 70, 20, 80, 45), 40),
