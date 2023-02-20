@@ -102,7 +102,8 @@ class BST:
     # ------------------------------------------------------------------ #
     def add(self, value: object) -> None:
         """
-        TODO: Write your implementation
+        Adds a passed value to a BST
+        Creates tree if empty
         """
         parent = None
         node = self._root
@@ -125,9 +126,78 @@ class BST:
 
     def remove(self, value: object) -> bool:
         """
-        TODO: Write your implementation
+        TODO: Write your implementation, empty, root no children
         """
-        pass
+        parent = None
+        successor = None
+        node = self._root
+        # if tree just root
+        if node.left is None and node.right is None:
+            self._root = None
+            return True
+        # if value is root
+        if node.value == value:
+            if node.right is not None:
+                node = node.right
+            while node is not None:
+                successor = node
+                node = node.left
+            self._root = successor
+            return True
+
+        # finds if value is in tree
+        found_value = None
+        while node is not None:
+            if node.value == value:
+                found_value = value
+            if value < node.value:
+                node = node.left
+            else:
+                node = node.right
+        # if value not found in tree
+        if found_value is None:
+            return False
+
+        node = self._root
+        # find parent node of node being removed
+        while node.value != value:
+            parent = node
+            if value < node.value:
+                node = node.left
+            else:
+                node = node.right
+        remove_node = node
+        # find successor
+        node = node.right
+        while node is not None:
+            successor = node
+            node = node.left
+        # if successor none make left node successor
+        if successor is None:
+            successor = remove_node.left
+            # if successor still none (leaf)
+            if successor is None:
+                # deletes leaf
+                if parent.value > value:
+                    parent.left = None
+                else:
+                    parent.right = None
+                return True
+            # assign successor (left node) to parent
+            if successor.value < parent.value:
+                parent.left = successor
+            else:
+                parent.right = successor
+            return True
+        # assign successor (right node) to parent
+        if successor.value > parent.value:
+            parent.right = successor
+        else:
+            parent.left = successor
+            successor.left = remove_node.left
+        return True
+
+
 
     # Consider implementing methods that handle different removal scenarios; #
     # you may find that you're able to use some of them in the AVL.          #
@@ -237,9 +307,10 @@ if __name__ == '__main__':
     print('add() stress test finished')
     print("\nPDF - method remove() example 1")
     print("-------------------------------")
+
     test_cases = (
         ((1, 2, 3), 1),
-        ((1, 2, 3), 2),
+        ((1, 2, 3, 4), 2),
         ((1, 2, 3), 3),
         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
         ((50, 40, 60, 30, 70, 20, 80, 45), 45),
