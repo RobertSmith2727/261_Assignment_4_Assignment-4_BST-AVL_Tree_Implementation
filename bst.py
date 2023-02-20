@@ -202,56 +202,64 @@ class BST:
             return False
 
         # no children
+        self._remove_no_subtrees(remove_parent, remove_node)
         if remove_node.left is None and remove_node.right is None:
-            if remove_parent.value > value:
-                remove_parent.left = None
-                return True
-            else:
-                remove_parent.right = None
-                return True
+            self._remove_no_subtrees(remove_parent, remove_node)
+            return True
+        #     if remove_parent.value > value:
+        #         remove_parent.left = None
+        #         return True
+        #     else:
+        #         remove_parent.right = None
+        #         return True
+
         # one child
         if remove_node.left is None and remove_node.right is not None:
-            if remove_parent.value > value:
-                remove_parent.left = remove_node.right
-                return True
-            else:
-                remove_parent.right = remove_node.right
-                return True
+            self._remove_one_subtree(remove_parent, remove_node)
+            return True
+            # if remove_parent.value > value:
+            #     remove_parent.left = remove_node.right
+            #     return True
+            # else:
+            #     remove_parent.right = remove_node.right
+            #     return True
 
         if remove_node.left is not None and remove_node.right is None:
-            if remove_parent.value > value:
-                remove_parent.left = remove_node.left
-                return True
+            self._remove_one_subtree(remove_parent, remove_node)
+            return True
+            # if remove_parent.value > value:
+            #     remove_parent.left = remove_node.left
+            #     return True
             # else:
             #     remove_parent.right = remove_node.left
             #     return True
 
-        # finds successor and parent
-        node = remove_node
-        successor = None
-        successor_parent = node
-        node = node.right
-        while node is not None:
-            successor = node
-            # finds successor parent
-            if node.right == successor:
-                successor_parent = node
-            if node.left == successor:
-                successor_parent = node
-            node = node.left
-
-        successor.left = remove_node.left
-        if successor != remove_node.right:
-            successor_parent.left = successor.right
-            successor.right = remove_node.right
-        if remove_parent.value < successor.value:
-            remove_parent.right = successor
-            return True
-        else:
-            remove_parent.left = successor
-            return True
-
-
+        self._remove_two_subtrees(remove_parent, remove_node)
+        return True
+        # # finds successor and parent
+        # node = remove_node
+        # successor = None
+        # successor_parent = node
+        # node = node.right
+        # while node is not None:
+        #     successor = node
+        #     # finds successor parent
+        #     if node.right == successor:
+        #         successor_parent = node
+        #     if node.left == successor:
+        #         successor_parent = node
+        #     node = node.left
+        #
+        # successor.left = remove_node.left
+        # if successor != remove_node.right:
+        #     successor_parent.left = successor.right
+        #     successor.right = remove_node.right
+        # if remove_parent.value < successor.value:
+        #     remove_parent.right = successor
+        #     return True
+        # else:
+        #     remove_parent.left = successor
+        #     return True
 
             # assign successor (left node) to parent
         #     if successor.value < remove_parent.value:
@@ -277,14 +285,38 @@ class BST:
         TODO: Write your implementation
         """
         # remove node that has no subtrees (no left or right nodes)
-        pass
+        if self._root.left is None and self._root.right is None:
+            self._root = None
+            return
+
+        if remove_node.left is None and remove_node.right is None:
+            if remove_parent.value > remove_node.value:
+                remove_parent.left = None
+                return
+            else:
+                remove_parent.right = None
+                return
 
     def _remove_one_subtree(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
         TODO: Write your implementation
         """
         # remove node that has a left or right subtree (only)
-        pass
+        if remove_node.left is None and remove_node.right is not None:
+            if remove_parent.value > remove_node.value:
+                remove_parent.left = remove_node.right
+                return
+            else:
+                remove_parent.right = remove_node.right
+                return
+
+        if remove_node.left is not None and remove_node.right is None:
+            if remove_parent.value > remove_node.value:
+                remove_parent.left = remove_node.left
+                return
+            else:
+                remove_parent.right = remove_node.left
+                return
 
     def _remove_two_subtrees(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
@@ -292,7 +324,40 @@ class BST:
         """
         # remove node that has two subtrees
         # need to find inorder successor and its parent (make a method!)
+        # finds successor and parent
+
+        successor, successor_parent = self.find_successor(remove_node)
+
+        successor.left = remove_node.left
+        if successor != remove_node.right:
+            successor_parent.left = successor.right
+            successor.right = remove_node.right
+        if remove_parent.value < successor.value:
+            remove_parent.right = successor
+            return True
+        else:
+            remove_parent.left = successor
+            return True
         pass
+
+    def find_successor(self, remove_node: BSTNode):
+        """
+        TODO
+        """
+        node = remove_node
+        successor = None
+        successor_parent = node
+        node = node.right
+        # iterates to successor
+        while node is not None:
+            successor = node
+            # finds successor parent
+            if node.right == successor:
+                successor_parent = node
+            if node.left == successor:
+                successor_parent = node
+            node = node.left
+        return successor, successor_parent
 
     def contains(self, value: object) -> bool:
         """
@@ -327,9 +392,11 @@ class BST:
         if self._root is None:
             return None
 
+        # if root is min
         node = self._root
         if node.left is None:
             return node.value
+        # iterate to far left(min)
         while node is not None:
             min_node = node
             node = node.left
@@ -342,9 +409,11 @@ class BST:
         # if empty
         if self._root is None:
             return None
+        # if root is max
         node = self._root
         if node.right is None:
             return node.value
+        # iterate far right(max)
         while node is not None:
             max_node = node
             node = node.right
@@ -414,7 +483,7 @@ if __name__ == '__main__':
     # ((1, 2, 3, 4), 2)
     # ((1, 2, 3), 3)
     test_cases = (
-        ((26, 58, 42, 12, -45, -12, 22, -70, -36),58),
+        ((26, 58, 42, 12, -45, -12, 22, -70, -36), - 70),
         ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
         ((6, -83, -66, -4, 37, 25, 30, 40, 85),6),
         ((25,-83,-66,-21,37,30,40,85), -83),
@@ -429,22 +498,22 @@ if __name__ == '__main__':
         print('INPUT  :', tree, "DEL:", del_value)
         tree.remove(del_value)
         print('RESULT :', tree)
-    # print("\nPDF - method remove() example 2")
-    # print("-------------------------------")
-    # test_cases = (
-    #     ((50, 40, 60, 30, 70, 20, 80, 45), 20),
-    #     ((50, 40, 60, 30, 70, 20, 80, 15), 40),
-    #     ((50, 40, 60, 30, 70, 20, 80, 35), 20),
-    #     ((50, 40, 60, 30, 70, 20, 80, 25), 40),
-    # )
-    # for case, del_value in test_cases:
-    #     tree = BST(case)
-    #     print('INPUT  :', tree, "DEL:", del_value)
-    #     tree.remove(del_value)
-    #     print('RESULT :', tree)
+    print("\nPDF - method remove() example 2")
+    print("-------------------------------")
+    test_cases = (
+        ((50, 40, 60, 30, 70, 20, 80, 45), 20),
+        ((50, 40, 60, 30, 70, 20, 80, 15), 40),
+        ((50, 40, 60, 30, 70, 20, 80, 35), 20),
+        ((50, 40, 60, 30, 70, 20, 80, 25), 40),
+    )
+    for case, del_value in test_cases:
+        tree = BST(case)
+        print('INPUT  :', tree, "DEL:", del_value)
+        tree.remove(del_value)
+        print('RESULT :', tree)
     print("\nPDF - method remove() example 3")
     print("-------------------------------")
-    case = range(-9, 16, 2)
+    case = range(0, 6, 2)
     tree = BST(case)
     for del_value in case:
         print('INPUT  :', tree, del_value)
