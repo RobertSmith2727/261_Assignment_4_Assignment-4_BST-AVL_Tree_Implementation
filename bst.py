@@ -222,12 +222,10 @@ class BST:
             if remove_parent.left == remove_node:
                 remove_parent.left = remove_node.left
                 return True
-            # if remove_parent.right == remove_node:
-            #     remove_parent.right = remove_node.left
-            #     return True
-        if remove_node.left is not None and remove_node.right is None:
-            if remove_parent.left != remove_node:
+            else:
                 remove_parent.right = remove_node.left
+            return True
+
         # finds successor and parent
         node = remove_node
         successor = None
