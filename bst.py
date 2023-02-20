@@ -128,127 +128,68 @@ class BST:
         """
         TODO: Write your implementation, empty, root no children
         """
-        # parent = None
-        # successor = None
-        # node = self._root
-        # # if tree just a root
-        # if node.left is None and node.right is None:
-        #     self._root = None
-        #     return True
-        # # if value is root
-        # if node.value == value:
-        #     suc_right = node.right
-        #     suc_left = node.left
-        #     if node.right is not None:
-        #         node = node.right
-        #     while node is not None:
-        #         successor = node
-        #         node = node.left
-        #     node = suc_right
-        #     parent_node = node
-        #     if node.left is not None:
-        #         while node.left != successor:
-        #             parent_node = node
-        #             if value < node.value:
-        #                 node = node.left
-        #             else:
-        #                 node = node.right
-        #     parent_node.left = successor.right
-        #     self._root.value = successor.value
-        #     self._root.left = suc_left
-        #     self._root.right = suc_right
-        #     return True
-        #
-        # # finds if value is in tree
-        # found_value = None
-        # while node is not None:
-        #     if node.value == value:
-        #         found_value = value
-        #     if value < node.value:
-        #         node = node.left
-        #     else:
-        #         node = node.right
-        # # if value not found in tree
-        # if found_value is None:
-        #     return False
-        #
-        # node = self._root
-        # # find parent node of node being removed
-        # while node.value != value:
-        #     parent = node
-        #     if value < node.value:
-        #         node = node.left
-        #     else:
-        #         node = node.right
-        # remove_node = node
-        # # find successor
-        # node = node.right
-        # while node is not None:
-        #     successor = node
-        #     node = node.left
-        # # if successor none make left node successor
-        # if successor is None:
-        #     successor = remove_node.left
-        #     # if successor still none (leaf)
-        #     if successor is None:
-        #         # deletes leaf
-        #         if parent.value > value:
-        #             parent.left = None
-        #         else:
-        #             parent.right = None
-        #         return True
-        #     # assign successor (left node) to parent
-        #     if successor.value < parent.value:
-        #         parent.left = successor
-        #     else:
-        #         parent.right = successor
-        #     return True
-        # # assign successor (right node) to parent
-        # if successor.value > parent.value:
-        #     parent.right = successor
-        # else:
-        #     parent.left = successor
-        #     successor.left = remove_node.left
-        # return True
-        remove_parent = None
-        successor = None
-        node = self._root
 
-        # finds root successor
-        node = node.right
-        root_successor = None
-        while node is not None:
-            root_successor = node
-            node = node.left
-        if root_successor is None:
-            root_successor = self._root.left
+        # if empty
+        if self._root is None:
+            return False
 
-        # check if val in tree, get successor and remove node's parent
+        # if value is root
+        if self._root.value == value:
+            # no children
+            if self._root.left is None and self._root.right is None:
+                self._root = None
+                return True
+            # one child
+            if self._root.left is None and self._root.right is not None:
+                self._root = self._root.right
+                return True
+            if self._root.left is not None and self._root.right is None:
+                self._root = self._root.left
+                return True
+
+            # finds root successor
+            node = self._root.right
+            root_successor = None
+            while node is not None:
+                root_successor = node
+                node = node.left
+            if root_successor is None:
+                root_successor = self._root.left
+
+            # finds root successor parent
+            node = self._root.right
+            root_successor_parent = self._root
+            while node is not None:
+                # finds roots successor parent
+                if node.right == root_successor:
+                    root_successor_parent = node
+                if node.left == root_successor:
+                    root_successor_parent = node
+                node = node.left
+
+            # # if root successor is roots right node
+            # if self._root.right == root_successor:
+            #     self._root.value = root_successor.value
+            #     self._root.right = root_successor.right
+            #     self._root.left = root_successor.left
+            #     return True
+            else:
+                self._root.value = root_successor.value
+                root_successor_parent.left = root_successor.right
+                root_successor.right = None
+                return True
+
         node = self._root
         remove_node = None
-        root_successor_parent = None
         remove_parent = None
         while node is not None:
-            # finds roots successor parent
-            if node.right == root_successor:
-                root_successor_parent = node
-            if node.left == root_successor:
-                root_successor_parent = node
-
-            # finds parent of node to be removed for root
-            if self._root.value == value:
-                if node.right == value:
+            # finds parent of node to be removed
+            if node.right is not None:
+                if node.right.value == value:
                     remove_parent = node
-                if node.left == value:
+            if node.left is not None:
+                if node.left.value == value:
                     remove_parent = node
-            # finds parent of node to be removed for non root
-            if self._root.value != value:
-                if node.right is not None:
-                    if node.right.value == value:
-                        remove_parent = node
-                if node.left is not None:
-                    if node.left.value == value:
-                        remove_parent = node
             # finds node to be removed
             if node.value == value:
                 remove_node = node
@@ -260,27 +201,25 @@ class BST:
         if remove_node is None:
             return False
 
-        node = self._root
-        # if tree just a root
-        if node.left is None and node.right is None:
-            self._root = None
-            return True
-        # if value is root
-        if node.value == value:
-            # if root successor is roots right node
-            if self._root.right == root_successor:
-                self._root.value = root_successor.value
-                self._root.right = root_successor.right
-                self._root.left = root_successor.left
+        # no children
+        if remove_node.left is None and remove_node.right is None:
+            if remove_parent.value > value:
+                remove_parent.left = None
                 return True
             else:
-                self._root.value = root_successor.value
-                root_successor_parent.left = root_successor.right
-                root_successor.right = None
+                remove_parent.right = None
                 return True
+        # one child
+        if remove_node.left is None and remove_node.right is not None:
+            remove_parent.right = remove_node.right
+            return True
+        if remove_node.left is not None and remove_node.right is None:
+            remove_parent.left = remove_node.left
+            return True
 
         # finds successor and parent
         node = remove_node
+        successor = None
         successor_parent = node
         node = node.right
         while node is not None:
@@ -292,31 +231,42 @@ class BST:
                 successor_parent = node
             node = node.left
 
-        if successor is None:
-            successor = remove_node.left
-            # if successor still none (leaf)
-            if successor is None:
-                # deletes leaf
-                if remove_parent.value > value:
-                    remove_parent.left = None
-                else:
-                    remove_parent.right = None
-                return True
-            # assign successor (left node) to parent
-            if successor.value < remove_parent.value:
-                remove_parent.left = successor
-            else:
-                remove_parent.right = successor
-            return True
-        # assign successor (right node) to parent
-        if successor.value > remove_parent.value:
+        # if successor is None:
+        #     successor = remove_node.left
+        #     # if successor still none (leaf)
+        #     if successor is None:
+        #         # deletes leaf
+        #         if remove_parent.value > value:
+        #             remove_parent.left = None
+        #         else:
+        #             remove_parent.right = None
+        #         return True
+        successor.left = remove_node.left
+        if successor != remove_node.right:
+            successor_parent.left = successor.right
+            successor.right = remove_node.right
+        if remove_parent.value < successor.value:
             remove_parent.right = successor
+            return True
         else:
             remove_parent.left = successor
-            successor.left = remove_node.left
-        return True
+            return True
 
 
+
+            # assign successor (left node) to parent
+        #     if successor.value < remove_parent.value:
+        #         remove_parent.left = successor
+        #     else:
+        #         remove_parent.right = successor
+        #     return True
+        # # assign successor (right node) to parent
+        # if successor.value > remove_parent.value:
+        #     remove_parent.right = successor
+        # else:
+        #     remove_parent.left = successor
+        #     successor.left = remove_node.left
+        # return True
 
     # Consider implementing methods that handle different removal scenarios; #
     # you may find that you're able to use some of them in the AVL.          #
@@ -426,12 +376,13 @@ if __name__ == '__main__':
     print('add() stress test finished')
     print("\nPDF - method remove() example 1")
     print("-------------------------------")
-
+    # ((-95, 3, -57, -55, 45, 49, 21, -72, 24, -34), -95),
+    # ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
+    # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
+    # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
+    # ((1, 2, 3, 4), 2)
     test_cases = (
-        ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
-        ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
-        ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
-        ((1, 2, 3, 4), 2),
+
         ((1, 2, 3), 3),
         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
         ((50, 40, 60, 30, 70, 20, 80, 45), 45),
