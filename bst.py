@@ -211,7 +211,7 @@ class BST:
                 return True
         # one child
         if remove_node.left is None and remove_node.right is not None:
-            if remove_parent.left == remove_node:
+            if remove_parent.value > value:
                 remove_parent.left = remove_node.right
                 return True
             else:
@@ -219,11 +219,10 @@ class BST:
                 return True
 
         if remove_node.left is not None and remove_node.right is None:
-            if remove_parent.left == remove_node:
+            if remove_parent.value > value:
                 remove_parent.left = remove_node.left
                 return True
-        if remove_node.left is not None and remove_node.right is None:
-            if remove_parent.right == remove_node:
+            else:
                 remove_parent.right = remove_node.left
                 return True
 
@@ -241,16 +240,6 @@ class BST:
                 successor_parent = node
             node = node.left
 
-        # if successor is None:
-        #     successor = remove_node.left
-        #     # if successor still none (leaf)
-        #     if successor is None:
-        #         # deletes leaf
-        #         if remove_parent.value > value:
-        #             remove_parent.left = None
-        #         else:
-        #             remove_parent.right = None
-        #         return True
         successor.left = remove_node.left
         if successor != remove_node.right:
             successor_parent.left = successor.right
