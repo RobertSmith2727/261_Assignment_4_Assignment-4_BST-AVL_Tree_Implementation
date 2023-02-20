@@ -220,6 +220,8 @@ class BST:
         while node is not None:
             root_successor = node
             node = node.left
+        if root_successor is None:
+            root_successor = self._root.left
 
         # check if val in tree, get successor and remove node's parent
         node = self._root
@@ -426,6 +428,7 @@ if __name__ == '__main__':
     print("-------------------------------")
 
     test_cases = (
+        ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
         ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
         ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
         ((1, 2, 3, 4), 2),
