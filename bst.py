@@ -222,9 +222,9 @@ class BST:
             if remove_parent.left == remove_node:
                 remove_parent.left = remove_node.left
                 return True
-            # else:
-            #     remove_parent.right = remove_node.left
-            #     return True
+            if remove_parent.right == remove_node:
+                remove_parent.right = remove_node.left
+                return True
 
         # finds successor and parent
         node = remove_node
@@ -392,6 +392,7 @@ if __name__ == '__main__':
     # ((1, 2, 3, 4), 2)
     # ((1, 2, 3), 3)
     test_cases = (
+        ((26, 58, 42, 12, -45, -12, 22, -70, -36),58),
         ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
         ((6, -83, -66, -4, 37, 25, 30, 40, 85),6),
         ((25,-83,-66,-21,37,30,40,85), -83),
