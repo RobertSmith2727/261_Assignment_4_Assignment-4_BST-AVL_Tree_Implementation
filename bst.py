@@ -341,158 +341,157 @@ class BST:
 
 
 # ------------------- BASIC TESTING -----------------------------------------
-if __name__ == '__main__':
-    print("\nPDF - method add() example 1")
-    print("----------------------------")
-    test_cases = (
-        (1, 2, 3),
-        (3, 2, 1),
-        (1, 3, 2),
-        (3, 1, 2),
-    )
-    for case in test_cases:
-        tree = BST(case)
-        print(tree)
-    print("\nPDF - method add() example 2")
-    print("----------------------------")
-    test_cases = (
-        (10, 20, 30, 40, 50),
-        (10, 20, 30, 50, 40),
-        (30, 20, 10, 5, 1),
-        (30, 20, 10, 1, 5),
-        (5, 4, 6, 3, 7, 2, 8),
-        (range(0, 30, 3)),
-        (range(0, 31, 3)),
-        (range(0, 34, 3)),
-        (range(10, -10, -2)),
-        ('A', 'B', 'C', 'D', 'E'),
-        (1, 1, 1, 1),
-    )
-    for case in test_cases:
-        tree = BST(case)
-        print('INPUT  :', case)
-        print('RESULT :', tree)
-    print("\nPDF - method add() example 3")
-    print("----------------------------")
-    for _ in range(100):
-        case = list(set(random.randrange(1, 20000) for _ in range(900)))
-        tree = BST()
-        for value in case:
-            tree.add(value)
-        if not tree.is_valid_bst():
-            raise Exception("PROBLEM WITH ADD OPERATION")
-    print('add() stress test finished')
-    print("\nPDF - method remove() example 1")
-    print("-------------------------------")
-    # ((-95, 3, -57, -55, 45, 49, 21, -72, 24, -34), -95),
-    # ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
-    # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
-    # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
-    # ((1, 2, 3, 4), 2)
-    # ((1, 2, 3), 3)
-    # ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
-    # ((37, 6, 40, -83, -66, 85, 25, -4, 30), 6),
-    test_cases = (
-
-        ((25,-83,-66,-21,37,30,40,85), -83),
-        ((64, 100, -59, -22, -17, 54, 24, 26, -5, -33), 64),
-        ((50, 40, 60, 30, 70, 20, 80, 45), 0),
-        ((50, 40, 60, 30, 70, 20, 80, 45), 45),
-        ((50, 40, 60, 30, 70, 20, 80, 45), 40),
-        ((50, 40, 60, 30, 70, 20, 80, 45), 30),
-    )
-    for case, del_value in test_cases:
-        tree = BST(case)
-        print('INPUT  :', tree, "DEL:", del_value)
-        tree.remove(del_value)
-        print('RESULT :', tree)
-    # print("\nPDF - method remove() example 2")
-    # print("-------------------------------")
-    # test_cases = (
-    #     ((50, 40, 60, 30, 70, 20, 80, 45), 20),
-    #     ((50, 40, 60, 30, 70, 20, 80, 15), 40),
-    #     ((50, 40, 60, 30, 70, 20, 80, 35), 20),
-    #     ((50, 40, 60, 30, 70, 20, 80, 25), 40),
-    # )
-    # for case, del_value in test_cases:
-    #     tree = BST(case)
-    #     print('INPUT  :', tree, "DEL:", del_value)
-    #     tree.remove(del_value)
-    #     print('RESULT :', tree)
-    print("\nPDF - method remove() example 3")
-    print("-------------------------------")
-    case = range(-9, 16, 2)
-    tree = BST(case)
-    for del_value in case:
-        print('INPUT  :', tree, del_value)
-        tree.remove(del_value)
-        print('RESULT :', tree)
-    print("\nPDF - method remove() example 4")
-    print("-------------------------------")
-    case = range(0, 34, 3)
-    tree = BST(case)
-    for _ in case[:-2]:
-        root_value = tree.get_root().value
-        print('INPUT  :', tree, root_value)
-        tree.remove(root_value)
-        if not tree.is_valid_bst():
-            raise Exception("PROBLEM WITH REMOVE OPERATION")
-        print('RESULT :', tree)
-    print("\nPDF - method contains() example 1")
-    print("---------------------------------")
-    tree = BST([10, 5, 15])
-    print(tree.contains(15))
-    print(tree.contains(-10))
-    print(tree.contains(15))
-    print("\nPDF - method contains() example 2")
-    print("---------------------------------")
-    tree = BST()
-    print(tree.contains(0))
-    print("\nPDF - method inorder_traversal() example 1")
-    print("---------------------------------")
-    tree = BST([10, 20, 5, 15, 17, 7, 12])
-    print(tree.inorder_traversal())
-    print("\nPDF - method inorder_traversal() example 2")
-    print("---------------------------------")
-    tree = BST([8, 10, -4, 5, -1])
-    print(tree.inorder_traversal())
-    print("\nPDF - method find_min() example 1")
-    print("---------------------------------")
-    tree = BST([10, 20, 5, 15, 17, 7, 12])
-    print(tree)
-    print("Minimum value is:", tree.find_min())
-    print("\nPDF - method find_min() example 2")
-    print("---------------------------------")
-    tree = BST([8, 10, -4, 5, -1])
-    print(tree)
-    print("Minimum value is:", tree.find_min())
-    print("\nPDF - method find_max() example 1")
-    print("---------------------------------")
-    tree = BST([10, 20, 5, 15, 17, 7, 12])
-    print(tree)
-    print("Maximum value is:", tree.find_max())
-    print("\nPDF - method find_max() example 2")
-    print("---------------------------------")
-    tree = BST([8, 10, -4, 5, -1])
-    print(tree)
-    print("Maximum value is:", tree.find_max())
-    print("\nPDF - method is_empty() example 1")
-    print("---------------------------------")
-    tree = BST([10, 20, 5, 15, 17, 7, 12])
-    print("Tree is empty:", tree.is_empty())
-    print("\nPDF - method is_empty() example 2")
-    print("---------------------------------")
-    tree = BST()
-    print("Tree is empty:", tree.is_empty())
-    print("\nPDF - method make_empty() example 1")
-    print("---------------------------------")
-    tree = BST([10, 20, 5, 15, 17, 7, 12])
-    print("Tree before make_empty():", tree)
-    tree.make_empty()
-    print("Tree after make_empty(): ", tree)
-    print("\nPDF - method make_empty() example 2")
-    print("---------------------------------")
-    tree = BST()
-    print("Tree before make_empty():", tree)
-    tree.make_empty()
-    print("Tree after make_empty(): ", tree)
+# if __name__ == '__main__':
+#     print("\nPDF - method add() example 1")
+#     print("----------------------------")
+#     test_cases = (
+#         (1, 2, 3),
+#         (3, 2, 1),
+#         (1, 3, 2),
+#         (3, 1, 2),
+#     )
+#     for case in test_cases:
+#         tree = BST(case)
+#         print(tree)
+#     print("\nPDF - method add() example 2")
+#     print("----------------------------")
+#     test_cases = (
+#         (10, 20, 30, 40, 50),
+#         (10, 20, 30, 50, 40),
+#         (30, 20, 10, 5, 1),
+#         (30, 20, 10, 1, 5),
+#         (5, 4, 6, 3, 7, 2, 8),
+#         (range(0, 30, 3)),
+#         (range(0, 31, 3)),
+#         (range(0, 34, 3)),
+#         (range(10, -10, -2)),
+#         ('A', 'B', 'C', 'D', 'E'),
+#         (1, 1, 1, 1),
+#     )
+#     for case in test_cases:
+#         tree = BST(case)
+#         print('INPUT  :', case)
+#         print('RESULT :', tree)
+#     print("\nPDF - method add() example 3")
+#     print("----------------------------")
+#     for _ in range(100):
+#         case = list(set(random.randrange(1, 20000) for _ in range(900)))
+#         tree = BST()
+#         for value in case:
+#             tree.add(value)
+#         if not tree.is_valid_bst():
+#             raise Exception("PROBLEM WITH ADD OPERATION")
+#     print('add() stress test finished')
+#     print("\nPDF - method remove() example 1")
+#     print("-------------------------------")
+#     # ((-95, 3, -57, -55, 45, 49, 21, -72, 24, -34), -95),
+#     # ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
+#     # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
+#     # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
+#     # ((1, 2, 3, 4), 2)
+#     # ((1, 2, 3), 3)
+#     test_cases = (
+#         ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
+#         ((6, -83, -66, -4, 37, 25, 30, 40, 85),6),
+#         ((25,-83,-66,-21,37,30,40,85), -83),
+#         ((64, 100, -59, -22, -17, 54, 24, 26, -5, -33), 64),
+#         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
+#         ((50, 40, 60, 30, 70, 20, 80, 45), 45),
+#         ((50, 40, 60, 30, 70, 20, 80, 45), 40),
+#         ((50, 40, 60, 30, 70, 20, 80, 45), 30),
+#     )
+#     for case, del_value in test_cases:
+#         tree = BST(case)
+#         print('INPUT  :', tree, "DEL:", del_value)
+#         tree.remove(del_value)
+#         print('RESULT :', tree)
+#     # print("\nPDF - method remove() example 2")
+#     # print("-------------------------------")
+#     # test_cases = (
+#     #     ((50, 40, 60, 30, 70, 20, 80, 45), 20),
+#     #     ((50, 40, 60, 30, 70, 20, 80, 15), 40),
+#     #     ((50, 40, 60, 30, 70, 20, 80, 35), 20),
+#     #     ((50, 40, 60, 30, 70, 20, 80, 25), 40),
+#     # )
+#     # for case, del_value in test_cases:
+#     #     tree = BST(case)
+#     #     print('INPUT  :', tree, "DEL:", del_value)
+#     #     tree.remove(del_value)
+#     #     print('RESULT :', tree)
+#     print("\nPDF - method remove() example 3")
+#     print("-------------------------------")
+#     case = range(-9, 16, 2)
+#     tree = BST(case)
+#     for del_value in case:
+#         print('INPUT  :', tree, del_value)
+#         tree.remove(del_value)
+#         print('RESULT :', tree)
+#     print("\nPDF - method remove() example 4")
+#     print("-------------------------------")
+#     case = range(0, 34, 3)
+#     tree = BST(case)
+#     for _ in case[:-2]:
+#         root_value = tree.get_root().value
+#         print('INPUT  :', tree, root_value)
+#         tree.remove(root_value)
+#         if not tree.is_valid_bst():
+#             raise Exception("PROBLEM WITH REMOVE OPERATION")
+#         print('RESULT :', tree)
+#     print("\nPDF - method contains() example 1")
+#     print("---------------------------------")
+#     tree = BST([10, 5, 15])
+#     print(tree.contains(15))
+#     print(tree.contains(-10))
+#     print(tree.contains(15))
+#     print("\nPDF - method contains() example 2")
+#     print("---------------------------------")
+#     tree = BST()
+#     print(tree.contains(0))
+#     print("\nPDF - method inorder_traversal() example 1")
+#     print("---------------------------------")
+#     tree = BST([10, 20, 5, 15, 17, 7, 12])
+#     print(tree.inorder_traversal())
+#     print("\nPDF - method inorder_traversal() example 2")
+#     print("---------------------------------")
+#     tree = BST([8, 10, -4, 5, -1])
+#     print(tree.inorder_traversal())
+#     print("\nPDF - method find_min() example 1")
+#     print("---------------------------------")
+#     tree = BST([10, 20, 5, 15, 17, 7, 12])
+#     print(tree)
+#     print("Minimum value is:", tree.find_min())
+#     print("\nPDF - method find_min() example 2")
+#     print("---------------------------------")
+#     tree = BST([8, 10, -4, 5, -1])
+#     print(tree)
+#     print("Minimum value is:", tree.find_min())
+#     print("\nPDF - method find_max() example 1")
+#     print("---------------------------------")
+#     tree = BST([10, 20, 5, 15, 17, 7, 12])
+#     print(tree)
+#     print("Maximum value is:", tree.find_max())
+#     print("\nPDF - method find_max() example 2")
+#     print("---------------------------------")
+#     tree = BST([8, 10, -4, 5, -1])
+#     print(tree)
+#     print("Maximum value is:", tree.find_max())
+#     print("\nPDF - method is_empty() example 1")
+#     print("---------------------------------")
+#     tree = BST([10, 20, 5, 15, 17, 7, 12])
+#     print("Tree is empty:", tree.is_empty())
+#     print("\nPDF - method is_empty() example 2")
+#     print("---------------------------------")
+#     tree = BST()
+#     print("Tree is empty:", tree.is_empty())
+#     print("\nPDF - method make_empty() example 1")
+#     print("---------------------------------")
+#     tree = BST([10, 20, 5, 15, 17, 7, 12])
+#     print("Tree before make_empty():", tree)
+#     tree.make_empty()
+#     print("Tree after make_empty(): ", tree)
+#     print("\nPDF - method make_empty() example 2")
+#     print("---------------------------------")
+#     tree = BST()
+#     print("Tree before make_empty():", tree)
+#     tree.make_empty()
+#     print("Tree after make_empty(): ", tree)
