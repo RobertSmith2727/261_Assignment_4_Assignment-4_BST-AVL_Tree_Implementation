@@ -294,9 +294,8 @@ class BST:
             if remove_parent.value > remove_node.value:
                 remove_parent.left = None
                 return
-            else:
-                remove_parent.right = None
-                return
+            remove_parent.right = None
+            return
             # if remove_parent.value > remove_node.value:
             #     remove_parent.left = None
             #     return
