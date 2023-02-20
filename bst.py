@@ -298,7 +298,20 @@ class BST:
         """
         TODO: Write your implementation
         """
-        pass
+        # if empty
+        if self._root is None:
+            return False
+
+        # finds val if in tree
+        node = self._root
+        while node is not None:
+            if node.value == value:
+                return True
+            if value < node.value:
+                node = node.left
+            else:
+                node = node.right
+        return False
 
     def inorder_traversal(self) -> Queue:
         """
