@@ -213,7 +213,7 @@ class BST:
         #         remove_parent.right = None
         #         return True
 
-        # one child
+        # one subtree
         if remove_node.left is None and remove_node.right is not None:
             self._remove_one_subtree(remove_parent, remove_node)
             return True
@@ -224,9 +224,9 @@ class BST:
             #     remove_parent.right = remove_node.right
             #     return True
 
-        if remove_node.left is not None and remove_node.right is None:
-            self._remove_one_subtree(remove_parent, remove_node)
-            return True
+        # if remove_node.left is not None and remove_node.right is None:
+        #     self._remove_one_subtree(remove_parent, remove_node)
+        #     return True
             # if remove_parent.value > value:
             #     remove_parent.left = remove_node.left
             #     return True
@@ -234,6 +234,7 @@ class BST:
             #     remove_parent.right = remove_node.left
             #     return True
 
+        # two subtrees
         self._remove_two_subtrees(remove_parent, remove_node)
         return True
         # # finds successor and parent
