@@ -339,7 +339,16 @@ class BST:
         """
         TODO: Write your implementation
         """
-        pass
+        # if empty
+        if self._root is None:
+            return None
+        node = self._root
+        if node.right is None:
+            return node.value
+        while node is not None:
+            max_node = node
+            node = node.right
+        return max_node.value
 
     def is_empty(self) -> bool:
         """
