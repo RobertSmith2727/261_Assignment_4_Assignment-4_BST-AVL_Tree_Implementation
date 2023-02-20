@@ -224,9 +224,9 @@ class BST:
             #     remove_parent.right = remove_node.right
             #     return True
 
-        if remove_node.left is not None and remove_node.right is None:
-            self._remove_one_subtree(remove_parent, remove_node)
-            return True
+        # if remove_node.left is not None and remove_node.right is None:
+        #     self._remove_one_subtree(remove_parent, remove_node)
+        #     return True
             # if remove_parent.value > value:
             #     remove_parent.left = remove_node.left
             #     return True
