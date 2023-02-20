@@ -323,7 +323,17 @@ class BST:
         """
         TODO: Write your implementation
         """
-        pass
+        # if empty
+        if self._root is None:
+            return None
+
+        node = self._root
+        if node.left is None:
+            return node
+        while node is not None:
+            min_node = node
+            node = node.left
+        return min_node.value
 
     def find_max(self) -> object:
         """
