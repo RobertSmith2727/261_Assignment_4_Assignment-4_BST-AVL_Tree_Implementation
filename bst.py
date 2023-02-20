@@ -105,25 +105,24 @@ class BST:
         Adds a passed value to a BST
         Creates tree if empty
         """
-        pass
-        # parent = None
-        # node = self._root
-        # # if empty
-        # if self._root is None:
-        #     self._root = BSTNode(value)
-        #     return
-        # # iterates to end node
-        # while node is not None:
-        #     parent = node
-        #     if value < node.value:
-        #         node = node.left
-        #     else:
-        #         node = node.right
-        # # assigns proper node
-        # if value < parent.value:
-        #     parent.left = BSTNode(value)
-        # else:
-        #     parent.right = BSTNode(value)
+        parent = None
+        node = self._root
+        # if empty
+        if self._root is None:
+            self._root = BSTNode(value)
+            return
+        # iterates to end node
+        while node is not None:
+            parent = node
+            if value < node.value:
+                node = node.left
+            else:
+                node = node.right
+        # assigns proper node
+        if value < parent.value:
+            parent.left = BSTNode(value)
+        else:
+            parent.right = BSTNode(value)
 
     def remove(self, value: object) -> bool:
         """
