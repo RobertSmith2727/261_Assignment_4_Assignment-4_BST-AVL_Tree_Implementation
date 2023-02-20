@@ -210,11 +210,20 @@ class BST:
                 return True
         # one child
         if remove_node.left is None and remove_node.right is not None:
-            remove_parent.right = remove_node.right
-            return True
+            if remove_parent.left == remove_node:
+                remove_parent.left = remove_node.right
+                return True
+            else:
+                remove_parent.right = remove_node.right
+                return True
+
         if remove_node.left is not None and remove_node.right is None:
-            remove_parent.left = remove_node.left
-            return True
+            if remove_parent.left == remove_node:
+                remove_parent.left = remove_node.left
+                return True
+            else:
+                remove_parent.right = remove_node.left
+                return True
 
         # finds successor and parent
         node = remove_node
@@ -381,8 +390,11 @@ if __name__ == '__main__':
     # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
     # ((1, 2, 3, 4), 2)
     # ((1, 2, 3), 3)
+    # ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
+    # ((37, 6, 40, -83, -66, 85, 25, -4, 30), 6),
     test_cases = (
 
+        ((25,-83,-66,-21,37,30,40,85), -83),
         ((64, 100, -59, -22, -17, 54, 24, 26, -5, -33), 64),
         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
         ((50, 40, 60, 30, 70, 20, 80, 45), 45),
