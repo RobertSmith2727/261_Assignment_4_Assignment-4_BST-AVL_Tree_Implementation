@@ -221,10 +221,9 @@ class BST:
         if remove_node.left is not None and remove_node.right is None:
             if remove_parent.value > value:
                 remove_parent.left = remove_node.left
-                return True
             else:
                 remove_parent.right = remove_node.left
-                return True
+            return True
 
         # finds successor and parent
         node = remove_node
