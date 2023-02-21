@@ -229,10 +229,9 @@ class BST:
         """
         # remove node that has no subtrees (no left or right nodes)
         if remove_node.left is None and remove_node.right is None:
-            if remove_parent.left is not None:
-                if remove_parent.left.value == remove_node.value:
-                    remove_parent.left = None
-                    return
+            if remove_parent.left == remove_node:
+                remove_parent.left = None
+                return
             remove_parent.right = None
             return
         # if remove_node.left is None and remove_node.right is None:
@@ -343,7 +342,7 @@ class BST:
         """
         TODO: Write your implementation
         """
-        pass
+        node = self._root
 
     def find_min(self) -> object:
         """
