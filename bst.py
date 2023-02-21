@@ -283,11 +283,12 @@ class BST:
         # finds successor and parent
 
         successor, successor_parent = self.find_successor(remove_node)
+
+        successor.left = remove_node.left
+        if successor != remove_node.right:
+            successor_parent.left = successor.right
+            successor.right = remove_node.right
         return successor
-        # successor.left = remove_node.left
-        # if successor != remove_node.right:
-        #     successor_parent.left = successor.right
-        #     successor.right = remove_node.right
         # if remove_parent.value < successor.value:
         #     remove_parent.right = successor
         #     return
