@@ -133,6 +133,7 @@ class BST:
         if self._root is None:
             return False
 
+        # --------------------root case-----------------------------
         # if value is root
         if self._root.value == value:
             # no children
@@ -178,6 +179,7 @@ class BST:
                 root_successor_parent.left = root_successor.right
                 root_successor.right = None
                 return True
+            # --------------------end root case-----------------------------
 
         node = self._root
         remove_node = None
@@ -205,76 +207,16 @@ class BST:
         if remove_node.left is None and remove_node.right is None:
             self._remove_no_subtrees(remove_parent, remove_node)
             return True
-        #     if remove_parent.value > value:
-        #         remove_parent.left = None
-        #         return True
-        #     else:
-        #         remove_parent.right = None
-        #         return True
 
         # one subtree
         if remove_node.left is not None and remove_node.right is None or \
             remove_node.left is None and remove_node.right is not None:
             self._remove_one_subtree(remove_parent, remove_node)
             return True
-            # if remove_parent.value > value:
-            #     remove_parent.left = remove_node.right
-            #     return True
-            # else:
-            #     remove_parent.right = remove_node.right
-            #     return True
-
-        # if remove_node.left is not None and remove_node.right is None:
-        #     self._remove_one_subtree(remove_parent, remove_node)
-        #     return True
-            # if remove_parent.value > value:
-            #     remove_parent.left = remove_node.left
-            #     return True
-            # else:
-            #     remove_parent.right = remove_node.left
-            #     return True
 
         # two subtrees
         self._remove_two_subtrees(remove_parent, remove_node)
         return True
-        # # finds successor and parent
-        # node = remove_node
-        # successor = None
-        # successor_parent = node
-        # node = node.right
-        # while node is not None:
-        #     successor = node
-        #     # finds successor parent
-        #     if node.right == successor:
-        #         successor_parent = node
-        #     if node.left == successor:
-        #         successor_parent = node
-        #     node = node.left
-        #
-        # successor.left = remove_node.left
-        # if successor != remove_node.right:
-        #     successor_parent.left = successor.right
-        #     successor.right = remove_node.right
-        # if remove_parent.value < successor.value:
-        #     remove_parent.right = successor
-        #     return True
-        # else:
-        #     remove_parent.left = successor
-        #     return True
-
-            # assign successor (left node) to parent
-        #     if successor.value < remove_parent.value:
-        #         remove_parent.left = successor
-        #     else:
-        #         remove_parent.right = successor
-        #     return True
-        # # assign successor (right node) to parent
-        # if successor.value > remove_parent.value:
-        #     remove_parent.right = successor
-        # else:
-        #     remove_parent.left = successor
-        #     successor.left = remove_node.left
-        # return True
 
     # Consider implementing methods that handle different removal scenarios; #
     # you may find that you're able to use some of them in the AVL.          #
@@ -286,17 +228,19 @@ class BST:
         TODO: Write your implementation
         """
         # remove node that has no subtrees (no left or right nodes)
-        if self._root.left is None and self._root.right is None:
-            self._root = None
-            return
-
         if remove_node.left is None and remove_node.right is None:
-            if remove_parent.value > remove_node.value:
+            if remove_parent.left == remove_node.value:
                 remove_parent.left = None
                 return
-            else:
-                remove_parent.right = None
-                return
+            remove_parent.right = None
+            return
+        # if remove_node.left is None and remove_node.right is None:
+        #     if remove_parent.value > remove_node.value:
+        #         remove_parent.left = None
+        #         return
+        #     else:
+        #         remove_parent.right = None
+        #         return
 
     def _remove_one_subtree(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
@@ -318,6 +262,22 @@ class BST:
             else:
                 remove_parent.right = remove_node.left
                 return
+        # if remove_node.left is None:
+        #     if remove_parent.value > remove_node.value:
+        #         remove_parent.left = remove_node.right
+        #
+        #         return
+        #     else:
+        #         remove_parent.right = remove_node.right
+        #         return
+        #
+        # if remove_node.right is None:
+        #     if remove_parent.value > remove_node.value:
+        #         remove_parent.left = remove_node.left
+        #         return
+        #     else:
+        #         remove_parent.right = remove_node.left
+        #         return
 
     def _remove_two_subtrees(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
@@ -476,22 +436,22 @@ if __name__ == '__main__':
     print('add() stress test finished')
     print("\nPDF - method remove() example 1")
     print("-------------------------------")
-    # ((-95, 3, -57, -55, 45, 49, 21, -72, 24, -34), -95),
-    # ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
-    # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
-    # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
-    # ((1, 2, 3, 4), 2)
-    # ((1, 2, 3), 3)
-    # ((26, 58, 42, 12, -45, -12, 22, -70, -36), - 70),
-    # ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
-    # ((6, -83, -66, -4, 37, 25, 30, 40, 85), 6),
-    # ((25, -83, -66, -21, 37, 30, 40, 85), -83),
-    # ((64, 100, -59, -22, -17, 54, 24, 26, -5, -33), 64),
-    # ((50, 40, 60, 30, 70, 20, 80, 45), 0),
-    # ((50, 40, 60, 30, 70, 20, 80, 45), 45),
-    # ((50, 40, 60, 30, 70, 20, 80, 45), 40),
-    test_cases = (
 
+    test_cases = (
+        ((-95, 3, -57, -55, 45, 49, 21, -72, 24, -34), -95),
+        ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
+        ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
+        ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
+        ((1, 2, 3, 4), 2),
+        ((1, 2, 3), 3),
+        ((26, 58, 42, 12, -45, -12, 22, -70, -36), - 70),
+        ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
+        ((6, -83, -66, -4, 37, 25, 30, 40, 85), 6),
+        ((25, -83, -66, -21, 37, 30, 40, 85), -83),
+        ((64, 100, -59, -22, -17, 54, 24, 26, -5, -33), 64),
+        ((50, 40, 60, 30, 70, 20, 80, 45), 0),
+        ((50, 40, 60, 30, 70, 20, 80, 45), 45),
+        ((50, 40, 60, 30, 70, 20, 80, 45), 40),
         ((50, 40, 60, 30, 70, 20, 80, 45), 20),
         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
         ((50, 40, 60, 30, 70, 20, 80, 45), 45),
