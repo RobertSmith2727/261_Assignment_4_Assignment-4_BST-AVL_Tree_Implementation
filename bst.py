@@ -281,9 +281,9 @@ class BST:
         # remove node that has two subtrees
         # need to find inorder successor and its parent (make a method!)
         # finds successor and parent
-        return
-        # successor, successor_parent = self.find_successor(remove_node)
-        #
+
+        successor, successor_parent = self.find_successor(remove_node)
+        return successor
         # successor.left = remove_node.left
         # if successor != remove_node.right:
         #     successor_parent.left = successor.right
