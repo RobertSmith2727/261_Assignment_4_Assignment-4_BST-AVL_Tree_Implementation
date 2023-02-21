@@ -202,21 +202,27 @@ class BST:
         # if value not found in tree
         if remove_node is None:
             return False
-
+        boole = True
         # no children
         if remove_node.left is None and remove_node.right is None:
             self._remove_no_subtrees(remove_parent, remove_node)
-            return True
+            remove_node = None
+            return boole
 
         # one subtree
         if remove_node.left is not None and remove_node.right is None or \
             remove_node.left is None and remove_node.right is not None:
             self._remove_one_subtree(remove_parent, remove_node)
-            return True
+            return boole
 
         # two subtrees
-        self._remove_two_subtrees(remove_parent, remove_node)
-        return True
+        if remove_node.left is None and remove_node.right is None:
+            self._remove_two_subtrees(remove_parent, remove_node)
+            return boole
+
+        else:
+            boole = False
+            return boole
 
     # Consider implementing methods that handle different removal scenarios; #
     # you may find that you're able to use some of them in the AVL.          #
@@ -439,13 +445,7 @@ if __name__ == '__main__':
     print("\nPDF - method remove() example 1")
     list_1 = [68, -21, 44, 19, -45, 53, 55, -98, -97]
     tree = BST(list_1)
-    print(tree)
-    tree.remove(68)
-    print(tree)
-    tree.remove(44)
-    print(tree)
-    tree.remove(-45)
-    print(tree)
+
     tree.remove(55)
     print(tree)
 
