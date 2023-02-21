@@ -232,9 +232,11 @@ class BST:
 
         if remove_parent.left is remove_node:
             remove_parent.left = None
+            remove_node.value = None
             return
         if remove_parent.right is remove_node:
             remove_parent.right = None
+            remove_node.value = None
             return
         else:
             return
