@@ -223,27 +223,26 @@ class BST:
     # Remove these comments.                                                 #
     # Remove these method stubs if you decide not to use them.               #
     # Change these methods in any way you'd like.                            #
+
     def _remove_no_subtrees(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
         TODO: Write your implementation
         """
         # remove node that has no subtrees (no left or right nodes)
-        if remove_node.left is None:
-            if remove_parent.value > remove_node.value:
-                remove_parent.left = None
-                return
-            else:
-                remove_parent.right = None
-                return
+        return
+        # if remove_parent.left is remove_node:
+        #     remove_parent.left = None
+        #     return
+        # if remove_parent.right is remove_node:
+        #     remove_parent.right = None
+        #     return
 
-        if remove_node.right is None:
-            if remove_parent.value > remove_node.value:
-                remove_parent.left = None
-                return
-            else:
-                remove_parent.right = None
-                return
-
+        #     if remove_parent.value > remove_node.value:
+        #         remove_parent.left = None
+        #         return
+        #     else:
+        #         remove_parent.right = None
+        #         return
     def _remove_one_subtree(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
         TODO: Write your implementation
@@ -370,13 +369,15 @@ class BST:
         """
         TODO: Write your implementation
         """
-        pass
+        if self._root == None:
+            return True
+        return False
 
     def make_empty(self) -> None:
         """
         TODO: Write your implementation
         """
-        pass
+        self._root = None
 
 
 # ------------------- BASIC TESTING -----------------------------------------
