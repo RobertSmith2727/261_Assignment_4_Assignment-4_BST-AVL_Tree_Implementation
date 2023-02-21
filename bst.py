@@ -229,11 +229,11 @@ class BST:
         """
         # remove node that has no subtrees (no left or right nodes)
         if remove_node.left is None and remove_node.right is None:
-            if remove_parent.left is None:
-                remove_parent.right = None
-                return
             if remove_parent.left == remove_node:
                 remove_parent.left = None
+                return
+            if remove_parent.right == remove_node:
+                remove_parent.right = None
                 return
 
         # if remove_node.left is None and remove_node.right is None:
@@ -445,7 +445,7 @@ if __name__ == '__main__':
         # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
         # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
         # ((1, 2, 3, 4), 2),
-        ((1, 2, 3), 3),
+        # ((1, 2, 3), 3),
         # ((26, 58, 42, 12, -45, -12, 22, -70, -36), - 70),
         # ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
         # ((6, -83, -66, -4, 37, 25, 30, 40, 85), 6),
@@ -454,8 +454,8 @@ if __name__ == '__main__':
         # ((50, 40, 60, 30, 70, 20, 80, 45), 0),
         # ((50, 40, 60, 30, 70, 20, 80, 45), 45),
         # ((50, 40, 60, 30, 70, 20, 80, 45), 40),
-        ((50, 40, 60, 30, 70, 20, 80, 45), 20),
-        ((50, 40, 60, 30, 70, 20, 80, 45), 0),
+        # ((50, 40, 60, 30, 70, 20, 80, 45), 20),
+        # ((50, 40, 60, 30, 70, 20, 80, 45), 0),
         ((50, 40, 60, 30, 70, 20, 80, 45), 45),
         ((50, 40, 60, 30, 70, 20, 80, 45), 40),
         ((50, 40, 60, 30, 70, 20, 80, 45), 30),
