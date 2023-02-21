@@ -206,7 +206,6 @@ class BST:
         # no children
         if remove_node.left is None and remove_node.right is None:
             self._remove_no_subtrees(remove_parent, remove_node)
-            remove_node = None
             return boole
 
         # one subtree
@@ -216,7 +215,7 @@ class BST:
             return boole
 
         # two subtrees
-        if remove_node.left is None and remove_node.right is None:
+        if remove_node.left is not None and remove_node.right is not None:
             self._remove_two_subtrees(remove_parent, remove_node)
             return boole
 
@@ -443,18 +442,18 @@ if __name__ == '__main__':
     #         raise Exception("PROBLEM WITH ADD OPERATION")
     # print('add() stress test finished')
     print("\nPDF - method remove() example 1")
-    list_1 = [68, -21, 44, 19, -45, 53, 55, -98, -97]
-    tree = BST(list_1)
-
-    tree.remove(55)
-    print(tree)
+    # list_1 = [68, -21, 44, 19, -45, 53, 55, -98, -97]
+    # tree = BST(list_1)
+    #
+    # tree.remove(55)
+    # print(tree)
 
     print("-------------------------------")
 
     test_cases = (
-        ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
-        ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
-        ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
+        # ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
+        # ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
+        # ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
         # ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
         # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
         # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
@@ -470,7 +469,7 @@ if __name__ == '__main__':
         # ((50, 40, 60, 30, 70, 20, 80, 45), 40),
         # ((50, 40, 60, 30, 70, 20, 80, 45), 20),
         # ((50, 40, 60, 30, 70, 20, 80, 45), 0),
-        ((50, 40, 60, 30, 70, 20, 80, 45), 45),
+        # ((50, 40, 60, 30, 70, 20, 80, 45), 45),
         ((50, 40, 60, 30, 70, 20, 80, 45), 40),
         ((50, 40, 60, 30, 70, 20, 80, 45), 30),
     )
