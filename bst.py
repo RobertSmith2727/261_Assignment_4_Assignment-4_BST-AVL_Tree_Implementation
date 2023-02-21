@@ -229,10 +229,10 @@ class BST:
         """
         # remove node that has no subtrees (no left or right nodes)
         if remove_node.left is None and remove_node.right is None:
-            if remove_parent.left == remove_node:
+            if remove_parent.left is remove_node:
                 remove_parent.left = None
                 return
-            if remove_parent.right == remove_node:
+            if remove_parent.right is remove_node:
                 remove_parent.right = None
                 return
 
