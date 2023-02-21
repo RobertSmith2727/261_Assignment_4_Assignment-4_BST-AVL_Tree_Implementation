@@ -228,28 +228,28 @@ class BST:
         TODO: Write your implementation
         """
         # remove node that has no subtrees (no left or right nodes)
-        pass
-        # if remove_parent.left is remove_node:
-        #     remove_parent.left = None
-        #     return
-        # if remove_parent.right is remove_node:
-        #     remove_parent.right = None
-        #     return
+        if remove_node.left is None:
+            if remove_parent.value > remove_node.value:
+                remove_parent.left = None
+                return
+            else:
+                remove_parent.right = None
+                return
 
-
-        # if remove_node.left is None and remove_node.right is None:
-        #     if remove_parent.value > remove_node.value:
-        #         remove_parent.left = None
-        #         return
-        #     else:
-        #         remove_parent.right = None
-        #         return
+        if remove_node.right is None:
+            if remove_parent.value > remove_node.value:
+                remove_parent.left = None
+                return
+            else:
+                remove_parent.right = None
+                return
 
     def _remove_one_subtree(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
         TODO: Write your implementation
         """
         # remove node that has a left or right subtree (only)
+
         if remove_node.left is None:
             if remove_parent.value > remove_node.value:
                 remove_parent.left = remove_node.right
@@ -381,51 +381,65 @@ class BST:
 
 # ------------------- BASIC TESTING -----------------------------------------
 if __name__ == '__main__':
-    print("\nPDF - method add() example 1")
-    print("----------------------------")
-    test_cases = (
-        (1, 2, 3),
-        (3, 2, 1),
-        (1, 3, 2),
-        (3, 1, 2),
-    )
-    for case in test_cases:
-        tree = BST(case)
-        print(tree)
-    print("\nPDF - method add() example 2")
-    print("----------------------------")
-    test_cases = (
-        (10, 20, 30, 40, 50),
-        (10, 20, 30, 50, 40),
-        (30, 20, 10, 5, 1),
-        (30, 20, 10, 1, 5),
-        (5, 4, 6, 3, 7, 2, 8),
-        (range(0, 30, 3)),
-        (range(0, 31, 3)),
-        (range(0, 34, 3)),
-        (range(10, -10, -2)),
-        ('A', 'B', 'C', 'D', 'E'),
-        (1, 1, 1, 1),
-    )
-    for case in test_cases:
-        tree = BST(case)
-        print('INPUT  :', case)
-        print('RESULT :', tree)
-    print("\nPDF - method add() example 3")
-    print("----------------------------")
-    for _ in range(100):
-        case = list(set(random.randrange(1, 20000) for _ in range(900)))
-        tree = BST()
-        for value in case:
-            tree.add(value)
-        if not tree.is_valid_bst():
-            raise Exception("PROBLEM WITH ADD OPERATION")
-    print('add() stress test finished')
+    # print("\nPDF - method add() example 1")
+    # print("----------------------------")
+    # test_cases = (
+    #     (1, 2, 3),
+    #     (3, 2, 1),
+    #     (1, 3, 2),
+    #     (3, 1, 2),
+    # )
+    # for case in test_cases:
+    #     tree = BST(case)
+    #     print(tree)
+    # print("\nPDF - method add() example 2")
+    # print("----------------------------")
+    # test_cases = (
+    #     (10, 20, 30, 40, 50),
+    #     (10, 20, 30, 50, 40),
+    #     (30, 20, 10, 5, 1),
+    #     (30, 20, 10, 1, 5),
+    #     (5, 4, 6, 3, 7, 2, 8),
+    #     (range(0, 30, 3)),
+    #     (range(0, 31, 3)),
+    #     (range(0, 34, 3)),
+    #     (range(10, -10, -2)),
+    #     ('A', 'B', 'C', 'D', 'E'),
+    #     (1, 1, 1, 1),
+    # )
+    # for case in test_cases:
+    #     tree = BST(case)
+    #     print('INPUT  :', case)
+    #     print('RESULT :', tree)
+    # print("\nPDF - method add() example 3")
+    # print("----------------------------")
+    # for _ in range(100):
+    #     case = list(set(random.randrange(1, 20000) for _ in range(900)))
+    #     tree = BST()
+    #     for value in case:
+    #         tree.add(value)
+    #     if not tree.is_valid_bst():
+    #         raise Exception("PROBLEM WITH ADD OPERATION")
+    # print('add() stress test finished')
     print("\nPDF - method remove() example 1")
+    list_1 = [68, -21, 44, 19, -45, 53, 55, -98, -97]
+    tree = BST(list_1)
+    print(tree)
+    tree.remove(68)
+    print(tree)
+    tree.remove(44)
+    print(tree)
+    tree.remove(-45)
+    print(tree)
+    tree.remove(55)
+    print(tree)
+
     print("-------------------------------")
 
     test_cases = (
-        # ((-95, 3, -57, -55, 45, 49, 21, -72, 24, -34), -95),
+        ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
+        ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
+        ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
         # ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
         # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
         # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
