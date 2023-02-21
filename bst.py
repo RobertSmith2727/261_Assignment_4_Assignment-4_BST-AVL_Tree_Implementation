@@ -202,26 +202,25 @@ class BST:
         # if value not found in tree
         if remove_node is None:
             return False
-        boole = True
+
         # no children
         if remove_node.left is None and remove_node.right is None:
             self._remove_no_subtrees(remove_parent, remove_node)
-            return boole
+            return True
 
         # one subtree
         if remove_node.left is not None and remove_node.right is None or \
             remove_node.left is None and remove_node.right is not None:
             self._remove_one_subtree(remove_parent, remove_node)
-            return boole
+            return True
 
         # two subtrees
         if remove_node.left is not None and remove_node.right is not None:
             self._remove_two_subtrees(remove_parent, remove_node)
-            return boole
+            return True
 
         else:
-            boole = False
-            return boole
+            return False
 
     # Consider implementing methods that handle different removal scenarios; #
     # you may find that you're able to use some of them in the AVL.          #
@@ -292,9 +291,12 @@ class BST:
         if remove_parent.value < successor.value:
             remove_parent.right = successor
             return
-        else:
+        if remove_parent.value > successor.value:
             remove_parent.left = successor
             return
+        else:
+            return
+
 
     def find_successor(self, remove_node: BSTNode):
         """
@@ -451,7 +453,8 @@ if __name__ == '__main__':
     print("-------------------------------")
 
     test_cases = (
-        # ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
+        ((98, -29, -55, -87, -18, 48, -44, -12, -4, 31), 98),
+        ((-29, -55, -87, -44, -18, 48, -12, -4, 31), -55),
         # ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
         # ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
         # ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
