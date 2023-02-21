@@ -294,7 +294,7 @@ class BST:
             return
         else:
             remove_parent.left = successor
-            return
+        return
 
         # else:
         #     return
