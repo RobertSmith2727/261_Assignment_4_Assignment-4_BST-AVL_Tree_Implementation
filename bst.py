@@ -292,10 +292,10 @@ class BST:
         if remove_parent.value < successor.value:
             remove_parent.right = successor
             return
-        return successor
-        # if remove_parent.value > successor.value:
-        #     remove_parent.left = successor
-        #     return
+        if remove_parent.value > successor.value:
+            remove_parent.left = successor
+            return
+        return
         # else:
         #     return
 
