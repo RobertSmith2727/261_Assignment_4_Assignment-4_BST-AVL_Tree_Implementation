@@ -288,10 +288,11 @@ class BST:
         if successor != remove_node.right:
             successor_parent.left = successor.right
             successor.right = remove_node.right
+
+        if remove_parent.value < successor.value:
+            remove_parent.right = successor
+            return
         return successor
-        # if remove_parent.value < successor.value:
-        #     remove_parent.right = successor
-        #     return
         # if remove_parent.value > successor.value:
         #     remove_parent.left = successor
         #     return
