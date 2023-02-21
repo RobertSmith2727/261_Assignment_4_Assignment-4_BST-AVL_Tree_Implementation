@@ -229,20 +229,21 @@ class BST:
         TODO: Write your implementation
         """
         # remove node that has no subtrees (no left or right nodes)
-        return
-        # if remove_parent.left is remove_node:
-        #     remove_parent.left = None
-        #     return
-        # if remove_parent.right is remove_node:
-        #     remove_parent.right = None
-        #     return
 
-        #     if remove_parent.value > remove_node.value:
-        #         remove_parent.left = None
-        #         return
-        #     else:
-        #         remove_parent.right = None
-        #         return
+        if remove_parent.left is remove_node:
+            remove_parent.left = None
+            return
+        if remove_parent.right is remove_node:
+            remove_parent.right = None
+            return
+
+        if remove_parent.value > remove_node.value:
+            remove_parent.left = None
+            return
+        else:
+            remove_parent.right = None
+            return
+
     def _remove_one_subtree(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
         TODO: Write your implementation
@@ -328,7 +329,16 @@ class BST:
         """
         TODO: Write your implementation
         """
-        node = self._root
+        pass
+    #     ordered_queue = Queue()
+    #     node = self._root
+    #     previous_node = node
+    #     self.rec_inorder_traversal(node, previous_node, ordered_queue)
+    #
+    # def rec_inorder_traversal(self, node, previous_node, queue):
+    #     if node is None:
+    #         ordered_queue.enqueue(previous_node)
+    #     node = node.left
 
     def find_min(self) -> object:
         """
