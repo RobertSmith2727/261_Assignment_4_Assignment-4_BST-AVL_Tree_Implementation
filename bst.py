@@ -215,7 +215,7 @@ class BST:
             return True
 
         # two subtrees
-        if remove_node.left is not None and remove_node.right is not None:
+        if remove_node.left is None and remove_node.right is None:
             self._remove_two_subtrees(remove_parent, remove_node)
             return True
 
