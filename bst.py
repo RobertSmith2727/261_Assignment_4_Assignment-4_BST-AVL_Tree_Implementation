@@ -265,12 +265,12 @@ class BST:
         TODO: Write your implementation
         """
         # remove node that has a left or right subtree (only)
+        if remove_parent is None:
+            if self._root.left is None and self._root.right is not None:
+                self._root = self._root.right
 
-        if self._root.left is None and self._root.right is not None:
-            self._root = self._root.right
-            return
-        if self._root.left is not None and self._root.right is None:
-            self._root = self._root.left
+            if self._root.left is not None and self._root.right is None:
+                self._root = self._root.left
             return
 
         if remove_node.left is None:
