@@ -328,12 +328,16 @@ class BST:
         # iterates to successor
         while node is not None:
             successor = node
-            # finds successor parent
-            if previous_node.right == successor:
-                successor_parent = node
-            if previous_node.left == successor:
-                successor_parent = node
+            # # finds successor parent
+            # if previous_node.right == successor:
+            #     successor_parent = node
+            # if previous_node.left == successor:
+            #     successor_parent = node
             node = node.left
+        temp_node = remove_node.right
+        while temp_node != successor:
+            successor_parent = temp_node
+            temp_node = temp_node.left
 
         return successor, successor_parent
 
@@ -466,7 +470,7 @@ if __name__ == '__main__':
     print("\nPDF - method remove() example 1")
     print("-------------------------------")
     test_cases = (
-        ((-63, 33, -30, -24, -23, -55, -21, -49, -15), -63),
+        ((53, 3, -93, -100, -21, -47, -72, -8, 26), -93),
         ((1, 2, 3), 2),
         ((1, 2, 3), 3),
         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
