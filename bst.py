@@ -225,9 +225,11 @@ class BST:
             if node.left is not None:
                 if node.left.value == value:
                     remove_parent = node
+
             # finds node to be removed
             if node.value == value:
                 remove_node = node
+                break
             if value < node.value:
                 node = node.left
             else:
@@ -329,17 +331,13 @@ class BST:
         # iterates to successor
         while node is not None:
             successor = node
-            # # finds successor parent
-            # if previous_node.right == successor:
-            #     successor_parent = node
-            # if previous_node.left == successor:
-            #     successor_parent = node
             node = node.left
         temp_node = remove_node.right
         while temp_node != successor:
             successor_parent = temp_node
             temp_node = temp_node.left
-
+        if temp_node == successor:
+            successor_parent = remove_node
         return successor, successor_parent
 
     def contains(self, value: object) -> bool:
@@ -469,12 +467,9 @@ if __name__ == '__main__':
             raise Exception("PROBLEM WITH ADD OPERATION")
     print('add() stress test finished')
     print("\nPDF - method remove() example 1")
-    #((33, -58, -54, 77, 46, -17, 49, -47, -43, 25), 33),
-        # ((46, -58, -54, -17, -47, -43, 25, 77, 49 ), -54),
-        # ((46, -58, -17, -47, -43, 25, 77, 49 ), 46),
     print("-------------------------------")
     test_cases = (
-        (( 49, -58, -17, -47, -43, 25, 77 ), 49),
+        (( -9, -4, 5, -14, 1, 16, 17, 3, -6, 0, -3, -13, -15, -2, -14, 13, -10, -7, -12, 1, -3, -18, -5, -9, -9, 7, -19, 6, 18, -12), -3),
         ((50, 40, 60, 30, 70, 20, 80, 45), 45),
         ((50, 40, 60, 30, 70, 20, 80, 45), 40),
         ((50, 40, 60, 30, 70, 20, 80, 45), 30),
