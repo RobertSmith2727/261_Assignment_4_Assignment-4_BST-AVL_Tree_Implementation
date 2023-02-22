@@ -325,7 +325,7 @@ class BST:
         successor = None
         successor_parent = None
         node = node.right
-        previous_node = remove_node
+
         # iterates to successor
         while node is not None:
             successor = node
