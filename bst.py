@@ -291,12 +291,9 @@ class BST:
 
         if remove_parent.value < successor.value:
             remove_parent.right = successor
-            del remove_node
-            return
         else:
             remove_parent.left = successor
-            del remove_node
-            return
+        return
 
         # else:
         #     return
