@@ -420,100 +420,54 @@ class BST:
 
 # ------------------- BASIC TESTING -----------------------------------------
 if __name__ == '__main__':
-    # print("\nPDF - method add() example 1")
-    # print("----------------------------")
-    # test_cases = (
-    #     (1, 2, 3),
-    #     (3, 2, 1),
-    #     (1, 3, 2),
-    #     (3, 1, 2),
-    # )
-    # for case in test_cases:
-    #     tree = BST(case)
-    #     print(tree)
-    # print("\nPDF - method add() example 2")
-    # print("----------------------------")
-    # test_cases = (
-    #     (10, 20, 30, 40, 50),
-    #     (10, 20, 30, 50, 40),
-    #     (30, 20, 10, 5, 1),
-    #     (30, 20, 10, 1, 5),
-    #     (5, 4, 6, 3, 7, 2, 8),
-    #     (range(0, 30, 3)),
-    #     (range(0, 31, 3)),
-    #     (range(0, 34, 3)),
-    #     (range(10, -10, -2)),
-    #     ('A', 'B', 'C', 'D', 'E'),
-    #     (1, 1, 1, 1),
-    # )
-    # for case in test_cases:
-    #     tree = BST(case)
-    #     print('INPUT  :', case)
-    #     print('RESULT :', tree)
-    # print("\nPDF - method add() example 3")
-    # print("----------------------------")
-    # for _ in range(100):
-    #     case = list(set(random.randrange(1, 20000) for _ in range(900)))
-    #     tree = BST()
-    #     for value in case:
-    #         tree.add(value)
-    #     if not tree.is_valid_bst():
-    #         raise Exception("PROBLEM WITH ADD OPERATION")
-    # print('add() stress test finished')
-    print("\nPDF - method remove() example 1")
-    list_1 = [68, -21, 44, 19, -45, 53, 55, -98, -97]
-
-    tree = BST(list_1)
-    print(tree)
-    tree.remove(55)
-    print(tree, "two", 55)
-    tree.remove(-98)
-    print(tree, "one", -98)
-    tree.remove(-97)
-    print(tree, "zero", -97)
-
-    list_2 = [20,19,18,17,16]
-    tree = BST(list_2)
-    print(tree)
-    tree.remove(20)
-    print(tree, "root, left heavy", 20)
-
-    list_4 = [1,2,3,4,5,6,7]
-    tree = BST(list_4)
-    print(tree)
-    tree.remove(1)
-    print(tree, "root, right heavy", 1)
-
-    list_3 = [32, 69, -26, 71, 72, 9, 81, 54, 59, 94]
-    tree = BST(list_3)
-    print(tree)
-    tree.remove(32)
-    print(tree, "root, both sides", 32)
-
-
-    print("-------------------------------")
-
+    print("\nPDF - method add() example 1")
+    print("----------------------------")
     test_cases = (
-        ((98, -29, -55, -87, -18, 48, -44, -12, -4, 31), 98),
-        ((-29, -55, -87, -44, -18, 48, -12, -4, 31), -55),
-        # ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
-        # ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
-        # ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
-        # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
-        # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
-        # ((1, 2, 3, 4), 2),
-        # ((1, 2, 3), 3),
-        # ((26, 58, 42, 12, -45, -12, 22, -70, -36), - 70),
-        # ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
-        # ((6, -83, -66, -4, 37, 25, 30, 40, 85), 6),
-        # ((25, -83, -66, -21, 37, 30, 40, 85), -83),
-        # ((64, 100, -59, -22, -17, 54, 24, 26, -5, -33), 64),
-        # ((50, 40, 60, 30, 70, 20, 80, 45), 0),
-        # ((50, 40, 60, 30, 70, 20, 80, 45), 45),
-        # ((50, 40, 60, 30, 70, 20, 80, 45), 40),
-        # ((50, 40, 60, 30, 70, 20, 80, 45), 20),
-        # ((50, 40, 60, 30, 70, 20, 80, 45), 0),
-        # ((50, 40, 60, 30, 70, 20, 80, 45), 45),
+        (1, 2, 3),
+        (3, 2, 1),
+        (1, 3, 2),
+        (3, 1, 2),
+    )
+    for case in test_cases:
+        tree = BST(case)
+        print(tree)
+    print("\nPDF - method add() example 2")
+    print("----------------------------")
+    test_cases = (
+        (10, 20, 30, 40, 50),
+        (10, 20, 30, 50, 40),
+        (30, 20, 10, 5, 1),
+        (30, 20, 10, 1, 5),
+        (5, 4, 6, 3, 7, 2, 8),
+        (range(0, 30, 3)),
+        (range(0, 31, 3)),
+        (range(0, 34, 3)),
+        (range(10, -10, -2)),
+        ('A', 'B', 'C', 'D', 'E'),
+        (1, 1, 1, 1),
+    )
+    for case in test_cases:
+        tree = BST(case)
+        print('INPUT  :', case)
+        print('RESULT :', tree)
+    print("\nPDF - method add() example 3")
+    print("----------------------------")
+    for _ in range(100):
+        case = list(set(random.randrange(1, 20000) for _ in range(900)))
+        tree = BST()
+        for value in case:
+            tree.add(value)
+        if not tree.is_valid_bst():
+            raise Exception("PROBLEM WITH ADD OPERATION")
+    print('add() stress test finished')
+    print("\nPDF - method remove() example 1")
+    print("-------------------------------")
+    test_cases = (
+        ((1, 2, 3), 1),
+        ((1, 2, 3), 2),
+        ((1, 2, 3), 3),
+        ((50, 40, 60, 30, 70, 20, 80, 45), 0),
+        ((50, 40, 60, 30, 70, 20, 80, 45), 45),
         ((50, 40, 60, 30, 70, 20, 80, 45), 40),
         ((50, 40, 60, 30, 70, 20, 80, 45), 30),
     )
@@ -537,7 +491,7 @@ if __name__ == '__main__':
         print('RESULT :', tree)
     print("\nPDF - method remove() example 3")
     print("-------------------------------")
-    case = range(0, 6, 2)
+    case = range(-9, 16, 2)
     tree = BST(case)
     for del_value in case:
         print('INPUT  :', tree, del_value)
@@ -612,3 +566,56 @@ if __name__ == '__main__':
     print("Tree before make_empty():", tree)
     tree.make_empty()
     print("Tree after make_empty(): ", tree)
+
+
+    # print("\nPDF - method remove() example 1")
+    # list_1 = [68, -21, 44, 19, -45, 53, 55, -98, -97]
+    #
+    # tree = BST(list_1)
+    # print(tree)
+    # tree.remove(55)
+    # print(tree, "two", 55)
+    # tree.remove(-98)
+    # print(tree, "one", -98)
+    # tree.remove(-97)
+    # print(tree, "zero", -97)
+    #
+    # list_2 = [20, 19, 18, 17, 16]
+    # tree = BST(list_2)
+    # print(tree)
+    # tree.remove(20)
+    # print(tree, "root, left heavy", 20)
+    #
+    # list_4 = [1, 2, 3, 4, 5, 6, 7]
+    # tree = BST(list_4)
+    # print(tree)
+    # tree.remove(1)
+    # print(tree, "root, right heavy", 1)
+    #
+    # list_3 = [32, 69, -26, 71, 72, 9, 81, 54, 59, 94]
+    # tree = BST(list_3)
+    # print(tree)
+    # tree.remove(32)
+    # print(tree, "root, both sides", 32)
+    #
+    # print("-------------------------------")
+    # # ((98, -29, -55, -87, -18, 48, -44, -12, -4, 31), 98),
+    # # ((-29, -55, -87, -44, -18, 48, -12, -4, 31), -55),
+    # # ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
+    # # ((68, -21, 44, 19, -45, 53, 55, -98, -97), 68),
+    # # ((98, -90, 92, 52, 87, 57, -39, -67, -2, 31), 98),
+    # # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 32),
+    # # ((32, 69, -26, 71, 72, 9, 81, 54, 59, 94), 71),
+    # # ((1, 2, 3, 4), 2),
+    # # ((1, 2, 3), 3),
+    # # ((26, 58, 42, 12, -45, -12, 22, -70, -36), - 70),
+    # # ((3, 37, 6, 40, -83, -66, 85, 25, -4, 30), 3),
+    # # ((6, -83, -66, -4, 37, 25, 30, 40, 85), 6),
+    # # ((25, -83, -66, -21, 37, 30, 40, 85), -83),
+    # # ((64, 100, -59, -22, -17, 54, 24, 26, -5, -33), 64),
+    # # ((50, 40, 60, 30, 70, 20, 80, 45), 0),
+    # # ((50, 40, 60, 30, 70, 20, 80, 45), 45),
+    # # ((50, 40, 60, 30, 70, 20, 80, 45), 40),
+    # # ((50, 40, 60, 30, 70, 20, 80, 45), 20),
+    # # ((50, 40, 60, 30, 70, 20, 80, 45), 0),
+    # # ((50, 40, 60, 30, 70, 20, 80, 45), 45),
