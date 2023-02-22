@@ -300,6 +300,7 @@ class BST:
             if self._root.right == successor:
                 self._root.value = successor.value
                 self._root.right = successor.right
+                return
             if self._root.right != successor:
                 self._root.value = successor.value
                 successor_parent.left = successor.right
@@ -322,7 +323,7 @@ class BST:
         """
         node = remove_node
         successor = None
-        successor_parent = node
+        successor_parent = None
         node = node.right
         previous_node = remove_node
         # iterates to successor
@@ -468,12 +469,12 @@ if __name__ == '__main__':
             raise Exception("PROBLEM WITH ADD OPERATION")
     print('add() stress test finished')
     print("\nPDF - method remove() example 1")
+    #((33, -58, -54, 77, 46, -17, 49, -47, -43, 25), 33),
+        # ((46, -58, -54, -17, -47, -43, 25, 77, 49 ), -54),
+        # ((46, -58, -17, -47, -43, 25, 77, 49 ), 46),
     print("-------------------------------")
     test_cases = (
-        ((53, 3, -93, -100, -21, -47, -72, -8, 26), -93),
-        ((1, 2, 3), 2),
-        ((1, 2, 3), 3),
-        ((50, 40, 60, 30, 70, 20, 80, 45), 0),
+        (( 49, -58, -17, -47, -43, 25, 77 ), 49),
         ((50, 40, 60, 30, 70, 20, 80, 45), 45),
         ((50, 40, 60, 30, 70, 20, 80, 45), 40),
         ((50, 40, 60, 30, 70, 20, 80, 45), 30),
