@@ -323,15 +323,17 @@ class BST:
         successor = None
         successor_parent = node
         node = node.right
+        previous_node = remove_node
         # iterates to successor
         while node is not None:
-            # finds successor parent
-            if node.right == successor:
-                successor_parent = node
-            if node.left == successor:
-                successor_parent = node
             successor = node
+            # finds successor parent
+            if previous_node.right == successor:
+                successor_parent = node
+            if previous_node.left == successor:
+                successor_parent = node
             node = node.left
+
         return successor, successor_parent
 
     def contains(self, value: object) -> bool:
@@ -464,6 +466,7 @@ if __name__ == '__main__':
     print("-------------------------------")
     test_cases = (
         ((65, 100, 37, -92, 39, 74, -83, 86, 56, -97), 65),
+        ((-63, -90, 76, -50, -40, -71, 90, -99, -66, 63), -63),
         ((1, 2, 3), 2),
         ((1, 2, 3), 3),
         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
