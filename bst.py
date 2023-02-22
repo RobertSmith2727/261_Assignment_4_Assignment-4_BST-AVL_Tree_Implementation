@@ -325,12 +325,12 @@ class BST:
         node = node.right
         # iterates to successor
         while node is not None:
-            successor = node
             # finds successor parent
             if node.right == successor:
                 successor_parent = node
             if node.left == successor:
                 successor_parent = node
+            successor = node
             node = node.left
         return successor, successor_parent
 
@@ -463,7 +463,7 @@ if __name__ == '__main__':
     print("\nPDF - method remove() example 1")
     print("-------------------------------")
     test_cases = (
-        ((1, 2, 3), 1),
+        ((65, 100, 37, -92, 39, 74, -83, 86, 56, -97), 65),
         ((1, 2, 3), 2),
         ((1, 2, 3), 3),
         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
