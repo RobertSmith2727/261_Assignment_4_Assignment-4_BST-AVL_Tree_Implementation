@@ -155,52 +155,52 @@ class BST:
             self._remove_two_subtrees(remove_parent, remove_node)
             return True
 
-        # --------------------root case-----------------------------
-        # if value is root
-        if self._root.value == value:
-
-            # one child
-            if self._root.left is None and self._root.right is not None:
-                self._root = self._root.right
-                return True
-            if self._root.left is not None and self._root.right is None:
-                self._root = self._root.left
-                return True
-
-            # finds root successor
-            node = self._root.right
-            root_successor = None
-            while node is not None:
-                root_successor = node
-                node = node.left
-
-            if root_successor is None:
-                root_successor = self._root.left
-
-            # finds root successor parent
-            node = self._root.right
-            root_successor_parent = self._root
-            while node is not None:
-                # finds roots successor parent
-                if node.right == root_successor:
-                    root_successor_parent = node
-                if node.left == root_successor:
-                    root_successor_parent = node
-                node = node.left
-
-            # if root successor is roots right node
-            if self._root.right == root_successor:
-                self._root.value = root_successor.value
-                self._root.right = root_successor.right
-                return True
-            else:
-                self._root.value = root_successor.value
-                root_successor_parent.left = root_successor.right
-                root_successor.right = None
-                return True
-            # --------------------end root case-----------------------------
-
-
+        # # --------------------root case-----------------------------
+        # # if value is root
+        # if self._root.value == value:
+        #
+        #     # one child
+        #     if self._root.left is None and self._root.right is not None:
+        #         self._root = self._root.right
+        #         return True
+        #     if self._root.left is not None and self._root.right is None:
+        #         self._root = self._root.left
+        #         return True
+        #
+        #     # finds root successor
+        #     node = self._root.right
+        #     root_successor = None
+        #     while node is not None:
+        #         root_successor = node
+        #         node = node.left
+        #
+        #     if root_successor is None:
+        #         root_successor = self._root.left
+        #
+        #     # finds root successor parent
+        #     node = self._root.right
+        #     root_successor_parent = self._root
+        #     while node is not None:
+        #         # finds roots successor parent
+        #         if node.right == root_successor:
+        #             root_successor_parent = node
+        #         if node.left == root_successor:
+        #             root_successor_parent = node
+        #         node = node.left
+        #
+        #     # if root successor is roots right node
+        #     if self._root.right == root_successor:
+        #         self._root.value = root_successor.value
+        #         self._root.right = root_successor.right
+        #         return True
+        #     else:
+        #         self._root.value = root_successor.value
+        #         root_successor_parent.left = root_successor.right
+        #         root_successor.right = None
+        #         return True
+        #     # --------------------end root case-----------------------------
+        #
+        #
         else:
             return False
 
@@ -268,6 +268,7 @@ class BST:
         if remove_parent is None:
             if self._root.left is None and self._root.right is not None:
                 self._root = self._root.right
+                return
 
             if self._root.left is not None and self._root.right is None:
                 self._root = self._root.left
@@ -465,8 +466,7 @@ if __name__ == '__main__':
     print("\nPDF - method remove() example 1")
     print("-------------------------------")
     test_cases = (
-        ((65, 100, 37, -92, 39, 74, -83, 86, 56, -97), 65),
-        ((-63, -90, 76, -50, -40, -71, 90, -99, -66, 63), -63),
+        ((-63, 33, -30, -24, -23, -55, -21, -49, -15), -63),
         ((1, 2, 3), 2),
         ((1, 2, 3), 3),
         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
