@@ -336,8 +336,8 @@ class BST:
         while temp_node != successor:
             successor_parent = temp_node
             temp_node = temp_node.left
-        if temp_node == successor:
-            successor_parent = remove_node
+        # if temp_node == successor:
+        #     successor_parent = remove_node
         return successor, successor_parent
 
     def contains(self, value: object) -> bool:
@@ -469,7 +469,7 @@ if __name__ == '__main__':
     print("\nPDF - method remove() example 1")
     print("-------------------------------")
     test_cases = (
-        (( -9, -4, 5, -14, 1, 16, 17, 3, -6, 0, -3, -13, -15, -2, -14, 13, -10, -7, -12, 1, -3, -18, -5, -9, -9, 7, -19, 6, 18, -12), -3),
+        ((3, 73, -85, -52, 87, -39, 58, -4, 29, 62), 3),
         ((50, 40, 60, 30, 70, 20, 80, 45), 45),
         ((50, 40, 60, 30, 70, 20, 80, 45), 40),
         ((50, 40, 60, 30, 70, 20, 80, 45), 30),
