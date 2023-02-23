@@ -189,25 +189,23 @@ class BST:
         """
         TODO: Write your implementation
         """
-
+        # assigns none to parent pointing to node being removed
         if remove_parent is None:
             self._root = None
             return
         if remove_parent.left is remove_node:
             remove_parent.left = None
-
-
         if remove_parent.right is remove_node:
             remove_parent.right = None
-
         return
 
     def _remove_one_subtree(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
         TODO: Write your implementation
         """
-        # remove node that has a left or right subtree (only)
+        # if root
         if remove_parent is None:
+            # sets r/l node to new root
             if self._root.left is None and self._root.right is not None:
                 self._root = self._root.right
                 return
@@ -216,6 +214,7 @@ class BST:
                 self._root = self._root.left
             return
 
+        # sets node to parent pointer
         if remove_node.left is None:
             if remove_parent.value > remove_node.value:
                 remove_parent.left = remove_node.right
@@ -234,11 +233,12 @@ class BST:
         removes node that has two subtrees
         """
 
-        # finds successor and parent
+        # calls finds successor and parent
         successor, successor_parent = self.find_successor(remove_node)
 
-        # if root successor is roots right node
+        # if root
         if self._root == remove_node:
+            # if root successor is roots right node
             if self._root.right == successor:
                 self._root.value = successor.value
                 self._root.right = successor.right
@@ -248,11 +248,13 @@ class BST:
                 successor_parent.left = successor.right
                 successor.right = None
             return
-
+        # assigns remove left to successor left
         successor.left = remove_node.left
         if successor != remove_node.right:
+            # replaces successor with its right
             successor_parent.left = successor.right
             successor.right = remove_node.right
+        # assigns successor to proper parent node
         if remove_parent.value < successor.value:
             remove_parent.right = successor
         else:
@@ -273,11 +275,10 @@ class BST:
             successor = node
             node = node.left
         temp_node = remove_node.right
+        # iterates to successor parent
         while temp_node != successor:
             successor_parent = temp_node
             temp_node = temp_node.left
-        # if temp_node == successor:
-        #     successor_parent = remove_node
         return successor, successor_parent
 
     def contains(self, value: object) -> bool:
@@ -303,16 +304,19 @@ class BST:
         """
         TODO: Write your implementation
         """
-        pass
-    #     ordered_queue = Queue()
-    #     node = self._root
-    #     previous_node = node
-    #     self.rec_inorder_traversal(node, previous_node, ordered_queue)
-    #
-    # def rec_inorder_traversal(self, node, previous_node, queue):
-    #     if node is None:
-    #         ordered_queue.enqueue(previous_node)
-    #     node = node.left
+
+        ordered_queue = Queue()
+        node = self._root
+        self.rec_inorder_traversal(node, ordered_queue)
+        return ordered_queue
+
+    def rec_inorder_traversal(self, node, queue):
+        if node is not None:
+            self.rec_inorder_traversal(node.left, queue)
+            queue.enqueue(node.value)
+            self.rec_inorder_traversal(node.right, queue)
+        return
+
 
     def find_min(self) -> object:
         """
@@ -417,55 +421,55 @@ if __name__ == '__main__':
         tree.remove(del_value)
         print('RESULT :', tree)
     print("\nPDF - method remove() example 2")
-    # print("-------------------------------")
-    # test_cases = (
-    #     ((50, 40, 60, 30, 70, 20, 80, 45), 20),
-    #     ((50, 40, 60, 30, 70, 20, 80, 15), 40),
-    #     ((50, 40, 60, 30, 70, 20, 80, 35), 20),
-    #     ((50, 40, 60, 30, 70, 20, 80, 25), 40),
-    # )
-    # for case, del_value in test_cases:
-    #     tree = BST(case)
-    #     print('INPUT  :', tree, "DEL:", del_value)
-    #     tree.remove(del_value)
-    #     print('RESULT :', tree)
-    # print("\nPDF - method remove() example 3")
-    # print("-------------------------------")
-    # case = range(-9, 16, 2)
-    # tree = BST(case)
-    # for del_value in case:
-    #     print('INPUT  :', tree, del_value)
-    #     tree.remove(del_value)
-    #     print('RESULT :', tree)
-    # print("\nPDF - method remove() example 4")
-    # print("-------------------------------")
-    # case = range(0, 34, 3)
-    # tree = BST(case)
-    # for _ in case[:-2]:
-    #     root_value = tree.get_root().value
-    #     print('INPUT  :', tree, root_value)
-    #     tree.remove(root_value)
-    #     if not tree.is_valid_bst():
-    #         raise Exception("PROBLEM WITH REMOVE OPERATION")
-    #     print('RESULT :', tree)
-    # print("\nPDF - method contains() example 1")
-    # print("---------------------------------")
-    # tree = BST([10, 5, 15])
-    # print(tree.contains(15))
-    # print(tree.contains(-10))
-    # print(tree.contains(15))
-    # print("\nPDF - method contains() example 2")
-    # print("---------------------------------")
-    # tree = BST()
-    # print(tree.contains(0))
-    # print("\nPDF - method inorder_traversal() example 1")
-    # print("---------------------------------")
-    # tree = BST([10, 20, 5, 15, 17, 7, 12])
-    # print(tree.inorder_traversal())
-    # print("\nPDF - method inorder_traversal() example 2")
-    # print("---------------------------------")
-    # tree = BST([8, 10, -4, 5, -1])
-    # print(tree.inorder_traversal())
+    print("-------------------------------")
+    test_cases = (
+        ((50, 40, 60, 30, 70, 20, 80, 45), 20),
+        ((50, 40, 60, 30, 70, 20, 80, 15), 40),
+        ((50, 40, 60, 30, 70, 20, 80, 35), 20),
+        ((50, 40, 60, 30, 70, 20, 80, 25), 40),
+    )
+    for case, del_value in test_cases:
+        tree = BST(case)
+        print('INPUT  :', tree, "DEL:", del_value)
+        tree.remove(del_value)
+        print('RESULT :', tree)
+    print("\nPDF - method remove() example 3")
+    print("-------------------------------")
+    case = range(-9, 16, 2)
+    tree = BST(case)
+    for del_value in case:
+        print('INPUT  :', tree, del_value)
+        tree.remove(del_value)
+        print('RESULT :', tree)
+    print("\nPDF - method remove() example 4")
+    print("-------------------------------")
+    case = range(0, 34, 3)
+    tree = BST(case)
+    for _ in case[:-2]:
+        root_value = tree.get_root().value
+        print('INPUT  :', tree, root_value)
+        tree.remove(root_value)
+        if not tree.is_valid_bst():
+            raise Exception("PROBLEM WITH REMOVE OPERATION")
+        print('RESULT :', tree)
+    print("\nPDF - method contains() example 1")
+    print("---------------------------------")
+    tree = BST([10, 5, 15])
+    print(tree.contains(15))
+    print(tree.contains(-10))
+    print(tree.contains(15))
+    print("\nPDF - method contains() example 2")
+    print("---------------------------------")
+    tree = BST()
+    print(tree.contains(0))
+    print("\nPDF - method inorder_traversal() example 1")
+    print("---------------------------------")
+    tree = BST([10, 20, 5, 15, 17, 7, 12])
+    print(tree.inorder_traversal())
+    print("\nPDF - method inorder_traversal() example 2")
+    print("---------------------------------")
+    tree = BST([8, 10, -4, 5, -1])
+    print(tree.inorder_traversal())
     # print("\nPDF - method find_min() example 1")
     # print("---------------------------------")
     # tree = BST([10, 20, 5, 15, 17, 7, 12])
@@ -507,7 +511,7 @@ if __name__ == '__main__':
     # tree.make_empty()
     # print("Tree after make_empty(): ", tree)
     #
-
+    #
     # print("\nPDF - method remove() example 1")
     # list_1 = [68, -21, 44, 19, -45, 53, 55, -98, -97]
     #
