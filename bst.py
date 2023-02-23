@@ -128,14 +128,11 @@ class BST:
         """
         TODO: Write your implementation, empty, root no children
         """
-
         # if empty
         if self._root is None:
             return False
-
         # calls find remove node and parent
         remove_node, remove_parent = self.find_remove_node(value)
-
         # if value not found in tree
         if remove_node is None:
             return False
@@ -143,64 +140,15 @@ class BST:
         if remove_node.left is None and remove_node.right is None:
             self._remove_no_subtrees(remove_parent, remove_node)
             return True
-
         # one subtree
         if remove_node.left is not None and remove_node.right is None or \
                 remove_node.left is None and remove_node.right is not None:
             self._remove_one_subtree(remove_parent, remove_node)
             return True
-
         # two subtrees
         if remove_node.left is not None and remove_node.right is not None:
             self._remove_two_subtrees(remove_parent, remove_node)
             return True
-
-        # # --------------------root case-----------------------------
-        # # if value is root
-        # if self._root.value == value:
-        #
-        #     # one child
-        #     if self._root.left is None and self._root.right is not None:
-        #         self._root = self._root.right
-        #         return True
-        #     if self._root.left is not None and self._root.right is None:
-        #         self._root = self._root.left
-        #         return True
-        #
-        #     # finds root successor
-        #     node = self._root.right
-        #     root_successor = None
-        #     while node is not None:
-        #         root_successor = node
-        #         node = node.left
-        #
-        #     if root_successor is None:
-        #         root_successor = self._root.left
-        #
-        #     # finds root successor parent
-        #     node = self._root.right
-        #     root_successor_parent = self._root
-        #     while node is not None:
-        #         # finds roots successor parent
-        #         if node.right == root_successor:
-        #             root_successor_parent = node
-        #         if node.left == root_successor:
-        #             root_successor_parent = node
-        #         node = node.left
-        #
-        #     # if root successor is roots right node
-        #     if self._root.right == root_successor:
-        #         self._root.value = root_successor.value
-        #         self._root.right = root_successor.right
-        #         return True
-        #     else:
-        #         self._root.value = root_successor.value
-        #         root_successor_parent.left = root_successor.right
-        #         root_successor.right = None
-        #         return True
-        #     # --------------------end root case-----------------------------
-        #
-        #
         else:
             return False
 
@@ -229,6 +177,7 @@ class BST:
             if node.left is not None:
                 if node.left.value == value:
                     remove_parent = node
+            # iterates to value
             if value < node.value:
                 node = node.left
             else:
@@ -240,26 +189,18 @@ class BST:
         """
         TODO: Write your implementation
         """
-        # remove node that has no subtrees (no left or right nodes)
 
         if remove_parent is None:
             self._root = None
             return
         if remove_parent.left is remove_node:
             remove_parent.left = None
-            remove_node.value = None
+
 
         if remove_parent.right is remove_node:
             remove_parent.right = None
-            remove_node.value = None
-        return
 
-        # if remove_parent.value > remove_node.value:
-        #     remove_parent.left = None
-        #     return
-        # else:
-        #     remove_parent.right = None
-        #     return
+        return
 
     def _remove_one_subtree(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
