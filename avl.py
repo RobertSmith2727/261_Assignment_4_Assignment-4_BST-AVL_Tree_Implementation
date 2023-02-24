@@ -170,7 +170,33 @@ class AVL(BST):
         """
         TODO: Write your implementation
         """
-        pass
+        # calls finds successor and parent
+        successor, successor_parent = self.find_successor(remove_node)
+
+        # if root
+        if self._root == remove_node:
+            # if root successor is roots right node
+            if self._root.right == successor:
+                self._root.value = successor.value
+                self._root.right = successor.right
+                return
+            if self._root.right != successor:
+                self._root.value = successor.value
+                successor_parent.left = successor.right
+                successor.right = None
+            return
+        # assigns remove left to successor left
+        successor.left = remove_node.left
+        if successor != remove_node.right:
+            # replaces successor with its right
+            successor_parent.left = successor.right
+            successor.right = remove_node.right
+        # assigns successor to proper parent node
+        if remove_parent.value < successor.value:
+            remove_parent.right = successor
+        else:
+            remove_parent.left = successor
+        return
 
     def _remove_rebalance(self, parent_node: AVLNode):
         while parent_node is not None:
@@ -273,38 +299,38 @@ class AVL(BST):
 
 # ------------------- BASIC TESTING -----------------------------------------
 if __name__ == '__main__':
-    print("\nPDF - method add() example 1")
-    # -27, -77, -97, -54, 26, 23, 15, 75, 60, 88  right answer
-    print("----------------------------")
-    test_cases = (
-        (1,2,3),  # RR
-        (3, 2, 1),  # LL
-        (1, 3, 2),  # RL
-        (3, 1, 2),  # LR
-    )
-    for case in test_cases:
-        tree = AVL(case)
-        print(tree)
-    print("\nPDF - method add() example 2")
-    print("----------------------------")
-    test_cases = (
-        (10, 20, 30, 40, 50),  # RR, RR
-        (10, 20, 30, 50, 40),  # RR, RL
-        (30, 20, 10, 5, 1),  # LL, LL
-        (30, 20, 10, 1, 5),  # LL, LR
-        (5, 4, 6, 3, 7, 2, 8),  # LL, RR
-        (range(0, 30, 3)),
-        (range(0, 31, 3)),
-        (range(0, 34, 3)),
-        (range(10, -10, -2)),
-        ('A', 'B', 'C', 'D', 'E'),
-        (1, 1, 1, 1),
-    )
-    for case in test_cases:
-        tree = AVL(case)
-        print('INPUT  :', case)
-        print('RESULT :', tree)
-    print("\nPDF - method add() example 3")
+    # print("\nPDF - method add() example 1")
+    # # -27, -77, -97, -54, 26, 23, 15, 75, 60, 88  right answer
+    # print("----------------------------")
+    # test_cases = (
+    #     (1,2,3),  # RR
+    #     (3, 2, 1),  # LL
+    #     (1, 3, 2),  # RL
+    #     (3, 1, 2),  # LR
+    # )
+    # for case in test_cases:
+    #     tree = AVL(case)
+    #     print(tree)
+    # print("\nPDF - method add() example 2")
+    # print("----------------------------")
+    # test_cases = (
+    #     (10, 20, 30, 40, 50),  # RR, RR
+    #     (10, 20, 30, 50, 40),  # RR, RL
+    #     (30, 20, 10, 5, 1),  # LL, LL
+    #     (30, 20, 10, 1, 5),  # LL, LR
+    #     (5, 4, 6, 3, 7, 2, 8),  # LL, RR
+    #     (range(0, 30, 3)),
+    #     (range(0, 31, 3)),
+    #     (range(0, 34, 3)),
+    #     (range(10, -10, -2)),
+    #     ('A', 'B', 'C', 'D', 'E'),
+    #     (1, 1, 1, 1),
+    # )
+    # for case in test_cases:
+    #     tree = AVL(case)
+    #     print('INPUT  :', case)
+    #     print('RESULT :', tree)
+    # print("\nPDF - method add() example 3")
     # print("----------------------------")
     # for _ in range(100):
     #     case = list(set(random.randrange(1, 20000) for _ in range(900)))
@@ -317,8 +343,8 @@ if __name__ == '__main__':
     print("\nPDF - method remove() example 1")
     print("-------------------------------")
     test_cases = (
-        ((1, 2, 3), 1),  # no AVL rotation
         ((1, 2, 3), 2),  # no AVL rotation
+        ((1, 2, 3), 1),  # no AVL rotation
         ((1, 2, 3), 3),  # no AVL rotation
         ((50, 40, 60, 30, 70, 20, 80, 45), 0),
         ((50, 40, 60, 30, 70, 20, 80, 45), 45),  # no AVL rotation
