@@ -222,7 +222,7 @@ class AVL(BST):
             if previous_node_parent is None:
                 self._root = new_subtree_root
                 return
-            if previous_node_parent.right.value > new_subtree_root.value:
+            if previous_node_parent.value > new_subtree_root.value:
                 previous_node_parent.left = new_subtree_root
             else:
                 previous_node_parent.right = new_subtree_root
@@ -236,7 +236,7 @@ class AVL(BST):
             if previous_node_parent is None:
                 self._root = new_subtree_root
                 return
-            if previous_node_parent.right.value > new_subtree_root.value:
+            if previous_node_parent.value > new_subtree_root.value:
                 previous_node_parent.left = new_subtree_root
             else:
                 previous_node_parent.right = new_subtree_root
@@ -247,6 +247,7 @@ class AVL(BST):
 # ------------------- BASIC TESTING -----------------------------------------
 if __name__ == '__main__':
     print("\nPDF - method add() example 1")
+    # -27, -77, -97, -54, 26, 23, 15, 75, 60, 88  right answer
     print("----------------------------")
     test_cases = (
         (-27, -54, 75, 15, -77, 23, 88, 26, 60, -97),  # RR
