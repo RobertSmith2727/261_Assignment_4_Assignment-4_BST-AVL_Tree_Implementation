@@ -125,8 +125,6 @@ class AVL(BST):
             parent_node.right = AVLNode(value)
             parent_node.right.parent = parent_node
             node = parent_node.right
-        # updates heights
-        # self._update_height(node)
         while parent_node is not None:
             self._rebalance(parent_node)
             parent_node = parent_node.parent
@@ -248,17 +246,17 @@ class AVL(BST):
 
 # ------------------- BASIC TESTING -----------------------------------------
 if __name__ == '__main__':
-    # print("\nPDF - method add() example 1")
-    # print("----------------------------")
-    # test_cases = (
-    #     (1, 2, 3),  # RR
-    #     (3, 2, 1),  # LL
-    #     (1, 3, 2),  # RL
-    #     (3, 1, 2),  # LR
-    # )
-    # for case in test_cases:
-    #     tree = AVL(case)
-    #     print(tree)
+    print("\nPDF - method add() example 1")
+    print("----------------------------")
+    test_cases = (
+        (-27, -54, 75, 15, -77, 23, 88, 26, 60, -97),  # RR
+        (3, 2, 1),  # LL
+        (1, 3, 2),  # RL
+        (3, 1, 2),  # LR
+    )
+    for case in test_cases:
+        tree = AVL(case)
+        print(tree)
     print("\nPDF - method add() example 2")
     print("----------------------------")
     test_cases = (
