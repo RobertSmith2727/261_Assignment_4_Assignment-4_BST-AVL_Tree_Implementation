@@ -143,15 +143,18 @@ class AVL(BST):
         # no children
         if remove_node.left is None and remove_node.right is None:
             self._remove_no_subtrees(remove_parent, remove_node)
+            self._remove_rebalance(remove_node)
             return True
         # one subtree
         if remove_node.left is not None and remove_node.right is None or \
                 remove_node.left is None and remove_node.right is not None:
             self._remove_one_subtree(remove_parent, remove_node)
+            self._remove_rebalance(remove_node)
             return True
         # two subtrees
         if remove_node.left is not None and remove_node.right is not None:
             self._remove_two_subtrees(remove_parent, remove_node)
+            self._remove_rebalance(remove_node)
             return True
         else:
             return False
@@ -169,6 +172,11 @@ class AVL(BST):
         """
         pass
 
+    def _remove_rebalance(self, parent_node: AVLNode):
+        while parent_node is not None:
+            self._rebalance(parent_node)
+            parent_node = parent_node.parent
+
     # It's highly recommended to implement                          #
     # the following methods for balancing the AVL Tree.             #
     # Remove these comments.                                        #
@@ -178,10 +186,7 @@ class AVL(BST):
         """
         TODO: Write your implementation
         """
-        balance = self._get_height(node.right) - self._get_height(node.left)
-        if balance == 0:
-            balance = -1
-        return balance
+        return self._get_height(node.right) - self._get_height(node.left)
 
     def _get_height(self, node: AVLNode) -> int:
         """
