@@ -98,7 +98,39 @@ class AVL(BST):
         """
         TODO: Write your implementation
         """
-        pass
+        count = 0
+        # if empty
+        if self._root is None:
+            self._root = AVLNode(value)
+            return
+        # if repeat value
+        if value == self._root.value:
+            return
+        # iterates to end node
+        node = self._root
+        while node is not None:
+            parent_node = node
+            if value == node.value:
+                return
+            if value < node.value:
+                node = node.left
+            else:
+                node = node.right
+        # assigns proper node and parent
+        if value < parent_node.value:
+            parent_node.left = AVLNode(value)
+            parent_node.left.parent = parent_node
+            node = parent_node.left
+        if value > parent_node.value:
+            parent_node.right = AVLNode(value)
+            parent_node.right.parent = parent_node
+            node = parent_node.right
+        # updates heights
+        self._update_height(node)
+        while parent_node is not None:
+            self._rebalance(parent_node)
+            parent_node = parent_node.parent
+
 
     def remove(self, value: object) -> bool:
         """
@@ -128,37 +160,80 @@ class AVL(BST):
         """
         TODO: Write your implementation
         """
-        pass
+        return self._get_height(node.right) - self._get_height(node.left)
 
     def _get_height(self, node: AVLNode) -> int:
         """
         TODO: Write your implementation
         """
-        pass
+        if node is None:
+            return -1
+        left_height = self._get_height(node.left)
+        right_height = self._get_height(node.right)
+        return max(left_height, right_height) + 1
 
     def _rotate_left(self, node: AVLNode) -> AVLNode:
         """
         TODO: Write your implementation
         """
-        pass
+        child = node.right
+        node.right = child.left
+        if node.right is not None:
+            node.right.parent = node
+        child.left = node
+        node.parent = child
+        self._update_height(node)
+        self._update_height(child)
+        return child
 
     def _rotate_right(self, node: AVLNode) -> AVLNode:
         """
         TODO: Write your implementation
         """
-        pass
+        child = node.left
+        node.left = child.right
+        if node.left is not None:
+            node.left.parent = node
+        child.right = node
+        node.parent = child
+        self._update_height(node)
+        self._update_height(child)
+        return child
 
     def _update_height(self, node: AVLNode) -> None:
         """
         TODO: Write your implementation
         """
-        pass
+
+        # sets height up to root
+        while node != self._root:
+            node.height = self._get_height(node)
+            node = node.parent
+        # sets root height
+        node = self._root
+        node.height = self._get_height(node)
 
     def _rebalance(self, node: AVLNode) -> None:
         """
         TODO: Write your implementation
         """
-        pass
+        if self._balance_factor(node) < -1:
+            if self._balance_factor(node.left) > 0:
+                node.left = self._rotate_left(node.left)
+                node.left.parent = node
+            new_subtree_root = self._rotate_right(node)
+            new_subtree_root.parent = node.parent
+            node.parent.left = new_subtree_root    # n.parent.left or
+        elif self._balance_factor(node) > 1:
+            if self._balance_factor(node.right) < 0:
+                node.right = self._rotate_right(node.right)
+                node.right.parent = node
+            node_parent = node.parent
+            new_subtree_root = self._rotate_left(node)
+            new_subtree_root.parent = node_parent
+            node.parent.right = new_subtree_root         # n.parent.left or
+        else:
+            self._update_height(node)
 
 
 # ------------------- BASIC TESTING -----------------------------------------
