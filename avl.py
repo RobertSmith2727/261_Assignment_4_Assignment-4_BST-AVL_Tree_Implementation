@@ -76,7 +76,7 @@ class AVL(BST):
                 left = node.left.height if node.left else -1
                 right = node.right.height if node.right else -1
                 if node.height != 1 + max(left, right):
-                    # print("height")
+                    print("height")
                     return False
                 if node.parent:
                     # parent and child pointers are in sync
@@ -85,12 +85,12 @@ class AVL(BST):
                     else:
                         check_node = node.parent.right
                     if check_node != node:
-                        # print("p/c pointers")
+                        print("p/c pointers")
                         return False
                 else:
                     # NULL parent is only allowed on the root of the tree
                     if node != self._root:
-                        # print("null parent")
+                        print("null parent")
                         return False
                 stack.push(node.right)
                 stack.push(node.left)
@@ -153,6 +153,10 @@ class AVL(BST):
         if remove_node.left is not None and remove_node.right is None or \
                 remove_node.left is None and remove_node.right is not None:
             self._remove_one_subtree(remove_parent, remove_node)
+            if remove_node.right is not None:
+                remove_node.right.parent = remove_parent
+            else:
+                remove_node.left.parent = remove_parent
             self._remove_rebalance(remove_parent)
             print(self.is_valid_avl())
             return True
@@ -206,7 +210,7 @@ class AVL(BST):
             remove_node.right.parent = successor
             if successor_parent.parent == remove_node:
                 successor_parent.parent = successor
-            successor.parent = remove_parent
+            successor.parent = remove_parent.parent
         # assigns successor to proper parent node
         if remove_parent.value < successor.value:
             remove_parent.right = successor
@@ -394,9 +398,11 @@ if __name__ == '__main__':
     #     tree.remove(del_value)
     #     print('RESULT :', tree)
     print("\nPDF - method remove() example 4")
+    # -29310, 97347, 64451, 79621, -82395, -96057, 93000, 83017, 96810, 843, 50149, 37383, -28815, 12081, -10383, -5423, -1291, 90198, 57170, -62661
+    # -29310, 64451
     print("-------------------------------")
-    case = [-29310, 97347, 64451, 79621, -82395, -96057, 93000, 83017, 96810, 843, 50149, 37383, -28815, 12081, -10383, -5423, -1291, 90198, 57170, -62661]
-    remove = [-29310, 64451]
+    case = [68, -91, 13, -51, 81, -15, 18, 84, -39, -6]
+    remove = [68, 13, 81, 18]
     tree = AVL(case)
     for x in remove:
 
