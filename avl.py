@@ -119,9 +119,11 @@ class AVL(BST):
         # assigns proper node and parent
         if value < parent_node.value:
             parent_node.left = AVLNode(value)
+            parent_node.left.height = -1
             parent_node.left.parent = parent_node
         if value > parent_node.value:
             parent_node.right = AVLNode(value)
+            parent_node.right.height = -1
             parent_node.right.parent = parent_node
         while parent_node is not None:
             self._rebalance(parent_node)
@@ -260,15 +262,16 @@ class AVL(BST):
         """
         TODO: Write your implementation
         """
-
+        height = max(self._get_height(node.left), self._get_height(node.right)) + 1
+        if height == 0:
+            height = -1
         # sets height up to root
-        node.height = max(self._get_height(node.left), self._get_height(node.right)) + 1
+        node.height = height
 
     def _rebalance(self, node: AVLNode) -> None:
         """
         TODO: Write your implementation
         """
-        balance_f = self._balance_factor(node)
         if self._balance_factor(node) < -1:
             if self._balance_factor(node.left) > 0:
                 node.left = self._rotate_left(node.left)
