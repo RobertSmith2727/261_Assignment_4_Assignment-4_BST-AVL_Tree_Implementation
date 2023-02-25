@@ -224,11 +224,11 @@ class AVL(BST):
         """
         if node is None:
             return -1
-        else:
-            return max(self._get_height(node.left), self._get_height(node.right)) + 1
-        # left_height = self._get_height(node.left)
-        # right_height = self._get_height(node.right)
-        # return max(left_height, right_height) + 1
+        # else:
+        #     return max(self._get_height(node.left), self._get_height(node.right)) + 1
+        left_height = self._get_height(node.left)
+        right_height = self._get_height(node.right)
+        return max(left_height, right_height) + 1
 
     def _rotate_left(self, node: AVLNode) -> AVLNode:
         """
@@ -262,9 +262,7 @@ class AVL(BST):
         """
         TODO: Write your implementation
         """
-        # height = max(self._get_height(node.left), self._get_height(node.right)) + 1
-        # if height == 0:
-        #     height = -1
+
         # sets height up to root
         node.height = max(self._get_height(node.left), self._get_height(node.right)) + 1
 
