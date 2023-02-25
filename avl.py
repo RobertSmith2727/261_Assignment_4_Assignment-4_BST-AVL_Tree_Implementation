@@ -76,7 +76,7 @@ class AVL(BST):
                 left = node.left.height if node.left else -1
                 right = node.right.height if node.right else -1
                 if node.height != 1 + max(left, right):
-                    print("height")
+                    # print("height")
                     return False
                 if node.parent:
                     # parent and child pointers are in sync
@@ -85,12 +85,12 @@ class AVL(BST):
                     else:
                         check_node = node.parent.right
                     if check_node != node:
-                        print("p/c pointers")
+                        # print("p/c pointers")
                         return False
                 else:
                     # NULL parent is only allowed on the root of the tree
                     if node != self._root:
-                        print("null parent")
+                        # print("null parent")
                         return False
                 stack.push(node.right)
                 stack.push(node.left)
