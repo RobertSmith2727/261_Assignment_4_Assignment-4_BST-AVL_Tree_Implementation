@@ -76,6 +76,7 @@ class AVL(BST):
                 left = node.left.height if node.left else -1
                 right = node.right.height if node.right else -1
                 if node.height != 1 + max(left, right):
+                    print("height")
                     return False
                 if node.parent:
                     # parent and child pointers are in sync
@@ -84,10 +85,12 @@ class AVL(BST):
                     else:
                         check_node = node.parent.right
                     if check_node != node:
+                        print("p/c pointers")
                         return False
                 else:
                     # NULL parent is only allowed on the root of the tree
                     if node != self._root:
+                        print("null parent")
                         return False
                 stack.push(node.right)
                 stack.push(node.left)
@@ -200,15 +203,15 @@ class AVL(BST):
             if successor.right is not None:
                 successor.right.parent = successor_parent
             successor.right = remove_node.right
-            successor_parent.parent = successor
+            remove_node.right.parent = successor
+            if successor_parent.parent == remove_node:
+                successor_parent.parent = successor
+            successor.parent = remove_parent
         # assigns successor to proper parent node
         if remove_parent.value < successor.value:
             remove_parent.right = successor
-            successor.parent = remove_parent
         else:
             remove_parent.left = successor
-            successor.parent = remove_parent
-
         return successor_parent
 
 
@@ -392,8 +395,8 @@ if __name__ == '__main__':
     #     print('RESULT :', tree)
     print("\nPDF - method remove() example 4")
     print("-------------------------------")
-    case = [-30, -29, -91, -26, -100, -21, 49, -46, -68, -35]
-    remove = [-30, -91]
+    case = [-29310, 97347, 64451, 79621, -82395, -96057, 93000, 83017, 96810, 843, 50149, 37383, -28815, 12081, -10383, -5423, -1291, 90198, 57170, -62661]
+    remove = [-29310, 64451]
     tree = AVL(case)
     for x in remove:
 
