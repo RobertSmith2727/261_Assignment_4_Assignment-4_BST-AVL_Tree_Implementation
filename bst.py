@@ -3,7 +3,7 @@
 # Course:       CS261 - Data Structures
 # Assignment: 4
 # Due Date: 02/27/2023
-# Description:
+# Description: Creates a BST Tree with add, remove, min/max, contains, is empty and make empty methods
 
 import random
 from queue_and_stack import Queue, Stack
@@ -126,7 +126,8 @@ class BST:
 
     def remove(self, value: object) -> bool:
         """
-        TODO: Write your implementation, empty, root no children
+        Removes a passed value and returns ture if removed
+        Else returns false
         """
         # if empty
         if self._root is None:
@@ -152,14 +153,11 @@ class BST:
         else:
             return False
 
-    # Consider implementing methods that handle different removal scenarios; #
-    # you may find that you're able to use some of them in the AVL.          #
-    # Remove these comments.                                                 #
-    # Remove these method stubs if you decide not to use them.               #
-    # Change these methods in any way you'd like.                            #
-
     def find_remove_node(self, value):
-
+        """
+        Returns the node to be removed and its parent
+        """
+        # if root
         if self._root.value == value:
             return self._root, None
         node = self._root
@@ -184,15 +182,15 @@ class BST:
                 node = node.right
         return remove_node, remove_parent
 
-
     def _remove_no_subtrees(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
-        TODO: Write your implementation
+        Removes passed node with no subtrees
         """
         # assigns none to parent pointing to node being removed
         if remove_parent is None:
             self._root = None
             return
+        # deletes node by making it None
         if remove_parent.left is remove_node:
             remove_parent.left = None
         if remove_parent.right is remove_node:
@@ -201,7 +199,8 @@ class BST:
 
     def _remove_one_subtree(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
-        TODO: Write your implementation
+        Removes passed node with one subtree
+        Reassigns subtree to proper parent
         """
         # if root
         if remove_parent is None:
@@ -235,7 +234,8 @@ class BST:
 
     def _remove_two_subtrees(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
-        removes node that has two subtrees
+        Removes node that has two subtrees
+        Reassigns subtrees to proper parent
         """
 
         # calls finds successor and parent
@@ -268,7 +268,7 @@ class BST:
 
     def find_successor(self, remove_node: BSTNode):
         """
-        TODO
+        Returns the successor and it parent
         """
         node = remove_node
         successor = None
@@ -288,7 +288,8 @@ class BST:
 
     def contains(self, value: object) -> bool:
         """
-        TODO: Write your implementation
+        Returns true if BST has value in it
+        Else returns false
         """
         # if empty
         if self._root is None:
@@ -307,9 +308,9 @@ class BST:
 
     def inorder_traversal(self) -> Queue:
         """
-        TODO: Write your implementation
+        Returns an in order queue of BST
+        Calls helper method
         """
-
         ordered_queue = Queue()
         node = self._root
         self.rec_inorder_traversal(node, ordered_queue)
@@ -317,7 +318,8 @@ class BST:
 
     def rec_inorder_traversal(self, node, queue):
         """
-        TODO
+        Recursion helper method
+        Recursively traverses left then right
         """
         if node is not None:
             self.rec_inorder_traversal(node.left, queue)
@@ -325,10 +327,9 @@ class BST:
             self.rec_inorder_traversal(node.right, queue)
         return
 
-
     def find_min(self) -> object:
         """
-        TODO: Write your implementation
+        Returns the min value of the BST
         """
         # if empty
         if self._root is None:
@@ -346,7 +347,7 @@ class BST:
 
     def find_max(self) -> object:
         """
-        TODO: Write your implementation
+        Returns the max value of the BST
         """
         # if empty
         if self._root is None:
@@ -363,15 +364,16 @@ class BST:
 
     def is_empty(self) -> bool:
         """
-        TODO: Write your implementation
+        Returns true if BST is empty
+        Else returns false
         """
-        if self._root == None:
+        if self._root is None:
             return True
         return False
 
     def make_empty(self) -> None:
         """
-        TODO: Write your implementation
+        Makes BST empty
         """
         self._root = None
 
