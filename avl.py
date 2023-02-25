@@ -128,7 +128,7 @@ class AVL(BST):
         while parent_node is not None:
             self._rebalance(parent_node)
             parent_node = parent_node.parent
-
+        self.is_valid_avl()
 
     def remove(self, value: object) -> bool:
         """
@@ -262,11 +262,11 @@ class AVL(BST):
         """
         TODO: Write your implementation
         """
-        height = max(self._get_height(node.left), self._get_height(node.right)) + 1
-        if height == 0:
-            height = -1
+        # height = max(self._get_height(node.left), self._get_height(node.right)) + 1
+        # if height == 0:
+        #     height = -1
         # sets height up to root
-        node.height = height
+        node.height = max(self._get_height(node.left), self._get_height(node.right)) + 1
 
     def _rebalance(self, node: AVLNode) -> None:
         """
