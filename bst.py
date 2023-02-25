@@ -218,14 +218,19 @@ class BST:
         if remove_node.left is None:
             if remove_parent.value > remove_node.value:
                 remove_parent.left = remove_node.right
+                if remove_node.left is not None:
+                    remove_node.left.parent = remove_node
             else:
                 remove_parent.right = remove_node.right
+                if remove_node.right is not None:
+                    remove_node.right.parent = remove_node
 
         if remove_node.right is None:
             if remove_parent.value > remove_node.value:
                 remove_parent.left = remove_node.left
             else:
                 remove_parent.right = remove_node.left
+
         return
 
     def _remove_two_subtrees(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
