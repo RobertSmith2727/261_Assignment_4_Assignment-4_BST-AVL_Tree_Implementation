@@ -367,7 +367,7 @@ class BST:
         Returns true if BST is empty
         Else returns false
         """
-        if self._root is None:
+        if self._root == None:
             return True
         return False
 

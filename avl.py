@@ -370,42 +370,42 @@ if __name__ == '__main__':
     #         raise Exception("PROBLEM WITH ADD OPERATION")
     # print('add() stress test finished')
     print("\nPDF - method remove() example 1")
-    # print("-------------------------------")
-    # test_cases = (
-    #     ((1, 2, 3), 2),  # no AVL rotation
-    #     ((1, 2, 3), 1),  # no AVL rotation
-    #     ((1, 2, 3), 3),  # no AVL rotation
-    #     ((50, 40, 60, 30, 70, 20, 80, 45), 0),
-    #     ((50, 40, 60, 30, 70, 20, 80, 45), 45),  # no AVL rotation
-    #     ((50, 40, 60, 30, 70, 20, 80, 45), 40),  # no AVL rotation
-    #     ((50, 40, 60, 30, 70, 20, 80, 45), 30),  # no AVL rotation
-    # )
-    # for case, del_value in test_cases:
-    #     tree = AVL(case)
-    #     print('INPUT  :', tree, "DEL:", del_value)
-    #     tree.remove(del_value)
-    #     print('RESULT :', tree)
-    # print("\nPDF - method remove() example 2")
     print("-------------------------------")
-    # test_cases = (
-    #     ((-94, 5, 27, -23, 28, 17, -14, 21, -37, 60), -94),  # RR
-    #     (( 5, -23, -37, -14, 27, 17, 21, 28, 60), 27),  # LL
-    #     ((5, -23, -37, -14, 21, 17, 28, 60), 28),  # RL
-    #
-    # )
-    # for case, del_value in test_cases:
-    #     tree = AVL(case)
-    #     print('INPUT  :', tree, "DEL:", del_value)
-    #     tree.remove(del_value)
-    #     print('RESULT :', tree)
-    # print("\nPDF - method remove() example 3")
-    # print("-------------------------------")
-    # case = range(-9, 16, 2)
-    # tree = AVL(case)
-    # for del_value in case:
-    #     print('INPUT  :', tree, del_value)
-    #     tree.remove(del_value)
-    #     print('RESULT :', tree)
+    test_cases = (
+        ((1, 2, 3), 2),  # no AVL rotation
+        ((1, 2, 3), 1),  # no AVL rotation
+        ((1, 2, 3), 3),  # no AVL rotation
+        ((50, 40, 60, 30, 70, 20, 80, 45), 0),
+        ((50, 40, 60, 30, 70, 20, 80, 45), 45),  # no AVL rotation
+        ((50, 40, 60, 30, 70, 20, 80, 45), 40),  # no AVL rotation
+        ((50, 40, 60, 30, 70, 20, 80, 45), 30),  # no AVL rotation
+    )
+    for case, del_value in test_cases:
+        tree = AVL(case)
+        print('INPUT  :', tree, "DEL:", del_value)
+        tree.remove(del_value)
+        print('RESULT :', tree)
+    print("\nPDF - method remove() example 2")
+    print("-------------------------------")
+    test_cases = (
+        ((-94, 5, 27, -23, 28, 17, -14, 21, -37, 60), -94),  # RR
+        (( 5, -23, -37, -14, 27, 17, 21, 28, 60), 27),  # LL
+        ((5, -23, -37, -14, 21, 17, 28, 60), 28),  # RL
+
+    )
+    for case, del_value in test_cases:
+        tree = AVL(case)
+        print('INPUT  :', tree, "DEL:", del_value)
+        tree.remove(del_value)
+        print('RESULT :', tree)
+    print("\nPDF - method remove() example 3")
+    print("-------------------------------")
+    case = range(-9, 16, 2)
+    tree = AVL(case)
+    for del_value in case:
+        print('INPUT  :', tree, del_value)
+        tree.remove(del_value)
+        print('RESULT :', tree)
     print("\nPDF - method remove() example 4")
     print("-------------------------------")
     case = [-24, 73, -84, 49, 51, 19, 58, -37, -68, 95]
