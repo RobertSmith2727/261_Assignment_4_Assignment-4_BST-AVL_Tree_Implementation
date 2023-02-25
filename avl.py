@@ -193,15 +193,22 @@ class AVL(BST):
             return successor_parent
         # assigns remove left to successor left
         successor.left = remove_node.left
+        successor.left.parent = successor
         if successor != remove_node.right:
             # replaces successor with its right
             successor_parent.left = successor.right
+            if successor.right is not None:
+                successor.right.parent = successor_parent
             successor.right = remove_node.right
+            successor_parent.parent = successor
         # assigns successor to proper parent node
         if remove_parent.value < successor.value:
             remove_parent.right = successor
+            successor.parent = remove_parent
         else:
             remove_parent.left = successor
+            successor.parent = remove_parent
+
         return successor_parent
 
 
@@ -364,17 +371,17 @@ if __name__ == '__main__':
     #     print('RESULT :', tree)
     # print("\nPDF - method remove() example 2")
     print("-------------------------------")
-    test_cases = (
-        ((-94, 5, 27, -23, 28, 17, -14, 21, -37, 60), -94),  # RR
-        (( 5, -23, -37, -14, 27, 17, 21, 28, 60), 27),  # LL
-        ((5, -23, -37, -14, 21, 17, 28, 60), 28),  # RL
-
-    )
-    for case, del_value in test_cases:
-        tree = AVL(case)
-        print('INPUT  :', tree, "DEL:", del_value)
-        tree.remove(del_value)
-        print('RESULT :', tree)
+    # test_cases = (
+    #     ((-94, 5, 27, -23, 28, 17, -14, 21, -37, 60), -94),  # RR
+    #     (( 5, -23, -37, -14, 27, 17, 21, 28, 60), 27),  # LL
+    #     ((5, -23, -37, -14, 21, 17, 28, 60), 28),  # RL
+    #
+    # )
+    # for case, del_value in test_cases:
+    #     tree = AVL(case)
+    #     print('INPUT  :', tree, "DEL:", del_value)
+    #     tree.remove(del_value)
+    #     print('RESULT :', tree)
     # print("\nPDF - method remove() example 3")
     # print("-------------------------------")
     # case = range(-9, 16, 2)
@@ -385,8 +392,8 @@ if __name__ == '__main__':
     #     print('RESULT :', tree)
     print("\nPDF - method remove() example 4")
     print("-------------------------------")
-    case = [-94, 5, 27, -23, 28, 17, -14, 21, -37, 60]
-    remove = [-94,27,28]
+    case = [-30, -29, -91, -26, -100, -21, 49, -46, -68, -35]
+    remove = [-30, -91]
     tree = AVL(case)
     for x in remove:
 
