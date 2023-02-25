@@ -128,7 +128,7 @@ class AVL(BST):
         while parent_node is not None:
             self._rebalance(parent_node)
             parent_node = parent_node.parent
-        self.is_valid_avl()
+
 
     def remove(self, value: object) -> bool:
         """
@@ -186,6 +186,8 @@ class AVL(BST):
             if self._root.right != successor:
                 self._root.value = successor.value
                 successor_parent.left = successor.right
+                if successor.right is not None:
+                    successor.right.parent = successor_parent
                 successor.right = None
             return successor_parent
         # assigns remove left to successor left
