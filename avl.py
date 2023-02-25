@@ -214,8 +214,10 @@ class AVL(BST):
         # assigns successor to proper parent node
         if remove_parent.value < successor.value:
             remove_parent.right = successor
+            successor.parent = remove_parent
         else:
             remove_parent.left = successor
+            successor.parent = remove_parent
         return successor_parent
 
 
@@ -401,8 +403,8 @@ if __name__ == '__main__':
     # -29310, 97347, 64451, 79621, -82395, -96057, 93000, 83017, 96810, 843, 50149, 37383, -28815, 12081, -10383, -5423, -1291, 90198, 57170, -62661
     # -29310, 64451
     print("-------------------------------")
-    case = [68, -91, 13, -51, 81, -15, 18, 84, -39, -6]
-    remove = [68, 13, 81, 18]
+    case = [-24, 73, -84, 49, 51, 19, 58, -37, -68, 95]
+    remove = [-24]
     tree = AVL(case)
     for x in remove:
 
